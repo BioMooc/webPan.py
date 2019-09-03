@@ -1,6 +1,15 @@
-li:hover{background:#eee;}
-li img{border:0; width:16px; height:16px;}
-li span{padding:0 10px; color:#aaa;}
+table{border-collapse: collapse;}
+tablr tr{padding:15px;}
+table tr:hover{background:#eee;}
+table tr img{border:0; width:16px; height:16px;}
+table tr td {padding:0 10px; 
+    color:#aaa;
+    text-overflow: ellipsis;
+}
+table tr a{color: #00a; text-decoration: none;}
+table tr a:hover{text-decoration:underline;}
+
+table tr th{color:#999; font-size:80%;}
 
 .btn{
     color: red;
@@ -14,4 +23,5 @@ li span{padding:0 10px; color:#aaa;}
 	color: white;
     background: red;
 }
-h4 a.root{color:red;}
+h4 a.root{font-weight:bold; text-decoration:none;}
+h4 a.root:hover{color:red; text-decoration:underline;}

@@ -43,16 +43,17 @@ def getfiles():
     arr=re.split(sep, fpath);
     #arr to a links
     url="/list?fpath="
-    urlPath="<a class=root href=/list>根目录</a> "
+    urlPath="<a class=root href=/list>RootDir</a> "
     for i in range(len(arr)-1 ):
         url=url+arr[i]+"/"
         urlPath+="<a href="+url+">"+arr[i]+"</a>/"
         #print(i, arr[i], urlPath)
-    titlePath="<h4>Path: "+urlPath+"</h4>\n\n"; #cut to pieces.
+    titlePath="<h4>Index of "+urlPath+"</h4>\n\n"; #cut to pieces.
 
     #
     htmlF="";
     htmlD="";
+    table1="<table><tr> <th>FileName</th>   <th>Size</th>   <th>Modified</th>  </tr>"
     if os.path.isdir(fpathT):
         filelist = os.listdir(fpathT)
         for i in range(len(filelist)):
@@ -63,11 +64,11 @@ def getfiles():
             #
             if os.path.isfile(urlT): #type="file"
                 fSize=getDocSize(urlT);
-                htmlF+="<li class=file>"+imgFile+file+"<a target='_blank' href='/download?filename="+file+"&path="+fpath+"'>下载</a> <span>"+fSize+"</span>   <span>"+fTime+"</span>  </li>"
+                htmlF+="<tr class=file><td>"+imgFile+"<a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+"</a></td>  <td>"+fSize+"</td>   <td>"+fTime+"</td>  </tr>"
             if os.path.isdir(urlT): #type="dir"
-                htmlD+="<li class=dir>"+imgDir+file+"/ <a href='/list?fpath="+url+"/'>打开</a>   <span>"+fTime+"</span>  </li>"
+                htmlD+="<tr class=dir><td>"+imgDir+"/ <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"</a></td> <td>-</td>  <td>"+fTime+"</td>  </tr>"
         #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]
-    return title+css+titlePath+"<ol>"+htmlF+htmlD+"</ol>";
+    return title+css+titlePath+table1+htmlF+htmlD+"</table>";
 
 
 # post方法：上传文件的
