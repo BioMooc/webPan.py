@@ -35,20 +35,24 @@ def index():
 # get方法：查询当前路径下的所有文件
 @server.route('/list', methods=['get'])
 def getfiles():
-    fpath = request.values.get('fpath', '.') #获取用户输入的目录
+    fpath = request.values.get('fpath', './') #获取用户输入的目录
+    #保护目录，保证只能传入相对路径
+    if not fpath.startswith("."):
+        fpath='./'+fpath;
     fpathT=os.path.join(rootPath, fpath); #真实地址
     
+    #生成顶部路径超链接
     #str to arr, by the end of path
     sep=fpathT[-1];
     arr=re.split(sep, fpath);
     #arr to a links
     url="/list?fpath="
-    urlPath="<a class=root href=/list>RootDir</a> "
+    urlPath="<a href=/list>RootDir</a> "
     for i in range(len(arr)-1 ):
-        url=url+arr[i]+"/"
+        url=url+ arr[i]+"/";
         urlPath+="<a href="+url+">"+arr[i]+"</a>/"
         #print(i, arr[i], urlPath)
-    titlePath="<h4>Index of "+urlPath+"</h4>\n\n"; #cut to pieces.
+    titlePath="<h4 class=root>Index of "+urlPath+"</h4>\n\n"; #cut to pieces.
 
     #
     htmlF="";
@@ -66,7 +70,7 @@ def getfiles():
                 fSize=getDocSize(urlT);
                 htmlF+="<tr class=file><td>"+imgFile+"<a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+"</a></td>  <td>"+fSize+"</td>   <td>"+fTime+"</td>  </tr>"
             if os.path.isdir(urlT): #type="dir"
-                htmlD+="<tr class=dir><td>"+imgDir+"/ <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"</a></td> <td>-</td>  <td>"+fTime+"</td>  </tr>"
+                htmlD+="<tr class=dir><td>"+imgDir+"<a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>-</td>  <td>"+fTime+"</td>  </tr>"
         #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]
     return title+css+titlePath+table1+htmlF+htmlD+"</table>";
 
