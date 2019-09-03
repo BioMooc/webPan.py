@@ -2,5 +2,16 @@ li:hover{background:#eee;}
 li img{border:0; width:16px; height:16px;}
 li span{padding:0 10px; color:#aaa;}
 
+.btn{
+    color: red;
+    background: white;
+    padding: 2px 5px;
+    text-decoration: none;
+	border-radius:3px;
+}
 
+.btn:hover{
+	color: white;
+    background: red;
+}
 h4 a.root{color:red;}

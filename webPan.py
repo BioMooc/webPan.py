@@ -14,12 +14,13 @@ server = flask.Flask(__name__)
 def download():
     fpath = request.values.get('path', '') #获取文件路径
     fname = request.values.get('filename', '')  #获取文件名
+    fpathT = os.path.join(rootPath, fpath) #真实路径
     if fname.strip() and fpath.strip():
-        print(fname, fpath);
-        if os.path.isfile(os.path.join(fpath,fname)) and os.path.isdir(fpath):
-            return send_from_directory(fpath, fname, as_attachment=True) #返回要下载的文件内容给客户端
+        #print(fname, fpath);
+        if os.path.isfile(os.path.join(fpathT,fname)): # and os.path.isdir(fpath):
+            return send_from_directory(fpathT, fname, as_attachment=True) #返回要下载的文件内容给客户端
         else:
-            return '{"msg2":"参数不正确"}path=%s, filename=%s;' %(fpath, fname);
+            return '{"msg2":"参数不正确"}path=%s, filename=%s;' %(fpathT, fname);
     else:
         return '{"msg1":"请输入参数"}'
 #
@@ -35,9 +36,10 @@ def index():
 @server.route('/list', methods=['get'])
 def getfiles():
     fpath = request.values.get('fpath', '.') #获取用户输入的目录
-    #print(fpath)
+    fpathT=os.path.join(rootPath, fpath); #真实地址
+    
     #str to arr, by the end of path
-    sep=fpath[-1];
+    sep=fpathT[-1];
     arr=re.split(sep, fpath);
     #arr to a links
     url="/list?fpath="
@@ -51,16 +53,18 @@ def getfiles():
     #
     htmlF="";
     htmlD="";
-    if os.path.isdir(fpath):
-        filelist = os.listdir(fpath)
-        for file in filelist:
-            url=os.path.join(fpath, file);
-            fTime=getModifiedTime(url);
+    if os.path.isdir(fpathT):
+        filelist = os.listdir(fpathT)
+        for i in range(len(filelist)):
+            file=filelist[i];
+            url=os.path.join(fpath, file); #显示用虚拟文件路径
+            urlT=os.path.join(fpathT, file); #获取都要用真实路径
+            fTime=getModifiedTime(urlT);#真实路径获取时间
             #
-            if os.path.isfile(url): #type="file"
-                fSize=getDocSize(url);
+            if os.path.isfile(urlT): #type="file"
+                fSize=getDocSize(urlT);
                 htmlF+="<li class=file>"+imgFile+file+"<a target='_blank' href='/download?filename="+file+"&path="+fpath+"'>下载</a> <span>"+fSize+"</span>   <span>"+fTime+"</span>  </li>"
-            if os.path.isdir(url): #type="dir"
+            if os.path.isdir(urlT): #type="dir"
                 htmlD+="<li class=dir>"+imgDir+file+"/ <a href='/list?fpath="+url+"/'>打开</a>   <span>"+fTime+"</span>  </li>"
         #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]
     return title+css+titlePath+"<ol>"+htmlF+htmlD+"</ol>";
