@@ -6,7 +6,10 @@ table tr td {padding:0 10px;
     color:#aaa;
     text-overflow: ellipsis;
 }
-table tr a{color: #00a; text-decoration: none;}
+table tr a{color: #00a; text-decoration: none;
+    min-width: 50px;
+    display: inline-block;
+}
 table tr a:hover{text-decoration:underline;}
 
 table tr th{color:#999; font-size:80%;}
