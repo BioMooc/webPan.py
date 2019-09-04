@@ -1,4 +1,4 @@
-body{background:#fefffe;}
+div,p,h1,h4{margin:0; padding:0;}
 table{border-collapse: collapse;}
 tablr tr{padding:15px;}
 table tr:hover{background:#eee;}
@@ -11,7 +11,7 @@ table tr a{color: #00a; text-decoration: none;
     min-width: 50px;
     display: inline-block;
 }
-table tr a:hover{text-decoration:underline;}
+table tr a:hover{text-decoration:underline; color:red;}
 
 table tr th{color:#999; font-size:80%;}
 
@@ -29,8 +29,12 @@ table tr th{color:#999; font-size:80%;}
     background: red;
 }
 
-h4.root a{font-weight:bold; text-decoration:none;}
+h4.root{background:#ddd;}
+h4.root a{ color:#000; font-weight:bold; text-decoration:none;}
 h4.root a:hover{color:red; text-decoration:underline;}
 
-.form{padding:10px 20px;}
+.wrap{padding:10px 20px; width:80%; min-width:600px; margin:0 auto;}
 fieldset{border: 1px dashed #aaa;  background:#fff;}
+
+.footer, .footer a{color:#ddd;}
+.footer a:hover{color:red;}

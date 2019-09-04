@@ -3,18 +3,25 @@
 
 import os,time
 
-
 rootPath="F://Temp/"
+
 head='''
 <html>
 <head>
-<meta http-equiv=Content-Type content="text/html;charset=utf-8">\n
-<title>webPan.py - Mini网盘</title>
-<link rel="stylesheet" href="/static/css/webPan.css" />\n
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <title>webPan.py - Mini网盘
+v0.0.7
+    </title>
+    <link rel="stylesheet" href="/static/css/webPan.css" />
 </head>
 
 <body>
-<div class=form>
+<div class="wrap">
+    <h1>webPan.py</h1>
+</div>
+
+
+<div class="wrap">
     <fieldset>
         <legend>Upload File</legend>
         <form action="/upload" method="post" enctype="multipart/form-data">
@@ -27,6 +34,10 @@ head='''
 <script src="/static/js/main.js"></script>
 
 '''
+foot='<div class="wrap footer"> \
+    <p>&copy;2019 webPan.py | <a target=_blank href="">Fork Me</a> | rootPath('+rootPath+')</p> </div> \
+</body> </html>'
+
 
 img={
     "file":'<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACAklEQVR42u2XyUsDMRTGe3S5OpNSipP0oEkKXgQRBBE33BARRYqIIIKIIIgIggcR3HBB646IuG+H4oK1tC4V/Z96rO+BcxEmLm3m5IM5DUN+yfu+72U8ni9VEOBFxApWk0JZYwZErclEncl4vUGDDYYlmgos0UwCvIUw2WpS0WZavN1gwQ6DyU5CRRehPORlsoxSmuP5S+Hi6QzqKnKTTr69RwCm/E8QuPNMAVKpVPr59f3aLCyu8Pv9ub8CwGPPFAALIRJPyTuDicpfQWC/swFgQ8Sfkvdeyqt8vtK8HwGg2LIFYEPEEs8PeLI/gjAs2ZhNABviPhaP4+l+C4FWyzaADXEXjT3iBgkpyXd2AXhcB4ANcRuNveAazgAQMJkCzC2Fv32cXQDpltZcBuMzzgAQrboBYJPzziKEXNcOYPFFZw3AQNEOwOSyAoCHtGuAilWFBmS3bgBi8TXFLBA9+lsgNhSzgPe64IIt1Szo0w/AdxRJKPr121DsKpJQDuhPQrGniuJB7S6gfF81jodcEOGBwgVy2AUNHKmieMQFgGPVNBzV3wJ5qkrCMRc0cKZKwnEXhtGF4tdMTOi3obhU3oohKiehT1MQGNOEylm8wYBwFnCOA/0K+DhMLLkO7dqEd9sYrZhuGDDocbQZPIeodriKn+CRw3fnuHNcHNPW81+f9QFiij/qVroAPQAAAABJRU5ErkJggg==">',

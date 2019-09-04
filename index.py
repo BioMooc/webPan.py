@@ -2,9 +2,8 @@ import flask, os,sys,time,re, urllib.parse
 from webPanLib import *
 from flask import request, send_from_directory,redirect,url_for
 
-interface_path = os.path.dirname(__file__)
-sys.path.insert(0, interface_path)  #将当前文件的父目录加入临时系统变量
-
+#interface_path = os.path.dirname(__file__)
+#sys.path.insert(0, interface_path)  #将当前文件的父目录加入临时系统变量
 
 server = flask.Flask(__name__)
 
@@ -83,7 +82,7 @@ def getfiles():
     #tr 文件和文件夹
     htmlF="";
     htmlD="";
-    table1="<div class=form><fieldset> <legend>File List</legend> "+titlePath+"\
+    table1="<div class=wrap><fieldset> <legend>File List</legend> "+titlePath+"\
 <table><tr> <th></th> <th>FileName</th>   <th>Size</th>   <th>Modified</th>  </tr>\n"
     if os.path.isdir(fpathT):
         filelist = os.listdir(fpathT)
@@ -99,7 +98,7 @@ def getfiles():
             if os.path.isdir(urlT): #type="dir"
                 htmlD+="<tr class=dir> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>-</td>  <td>"+fTime+"</td>  </tr>\n"
         #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]
-    return head+debug+"<br>"+table1+htmlBack+htmlF+htmlD+"</table> </fieldset></div>";
+    return head+debug+table1+htmlBack+htmlF+htmlD+"</table> </fieldset></div>"+foot;
 
 
 # post方法：上传文件的 https://www.cnblogs.com/wl443587/p/10552542.html
