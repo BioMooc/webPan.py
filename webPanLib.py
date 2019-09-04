@@ -31,11 +31,11 @@ v0.0.7
         </form>
     </fieldset>
 </div>
-<script src="/static/js/main.js"></script>
 
 '''
 foot='<div class="wrap footer"> \
     <p>&copy;2019 webPan.py | <a target=_blank href="https://github.com/DawnEve/webPan.py">Fork Me</a> | rootPath('+rootPath+')</p> </div> \
+<script src="/static/js/main.js"></script> \
 </body> </html>'
 
 
@@ -45,6 +45,8 @@ img={
     "dir": '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABn0lEQVR42u2XvUsCYRzHH5WgN3r5K5qDotGhpamtrSFobGxrEWqwUI9DQwOJIFoSWsrTpEFEMgQjwigSkSQxTau78336dScYij5Kl7+jwS98hufgnu+H51l+DyGD9CEGA9G6jWS6Gy4X0aGUcwyZ4xgt+PanuuJhdBJE39dyr5nMy+XxWwf0ylPEWZfgTGShz+UH9YJsPgfpbKYrDzdWkP/xWMhs24YARNPrHhsoKW8QvTYDZ9GAlyUzLeXyx1732IyS8gb3gR3pJAj7I3C1SyZ9tgn4bZSUy7ymYtIpEL5F4FIS4AVB0YZ/EnBbiF1agBqEL9baBXy2cVArskRHgVohBKX8MTp0ATEIpfdDdCgCY1Dj/VB6c6BDFah+XkExxaJDF/jwQDG5hw5dIHcOhcQ2Op0FrKNQzZxBIbaFDlWgkj4F8XETHbpA6gTE6AY6FIERqCSPQLxbR4cqUH5xghBZRYcukLCDEF5Bhy4QtwIfWkaHLhBjgA8uoUMRGIbyswn4wCI6nQXYIfjy61WhaTjhpZnQqPpEJHcN3pH/Lt8WJRscHbhvPQAAAABJRU5ErkJggg==">',
     
     'back': '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAv0lEQVR42mNgGAVEApH5EfWi8yP+gzCIPSCWu1/t+W9xtpG+jkC23OfWxP82l1r/qxwupI8j0C2HOUDteAntHYHNcmQH0NQRuCxHdwBNHIHPcmwOoKojCFmOywFUcQQxluNzAMWOIMZyQg5AdgRZDiBkOTEOAGGyHYAN62zPx+kAmfUp/3Hpo1qWRA8ZZAdQ1aJRB4w6YNQBQ9IB+AoiqhVQ+BxAKh51ANkOwNYopZsDxOZHNJCa0KiaCEfBsAcAEh85/7c92uEAAAAASUVORK5CYII=">',
+    
+    'order':'<img title="order" id=order src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAHCAYAAADebrddAAAAiklEQVR42mPIrewMya3oup5X2XkeiC/nVXRezgViEDu3vPMskH0BROeVdqkyJNTXcwAlDgDxfwxcAaWrOpsYYCC/qlUcKPgMLlnZBcWd/4E272BAB0DdjkDJf2AFFRBTgfTj4uIeEQZsAKigHmE6EJd32DDgA0DF20FOyK/sqmIgBEDWAhVPwyYHAJAqZIiNwsHKAAAAAElFTkSuQmCC" style="width:11px;height:9px;">'
     
 };
 
@@ -83,4 +85,4 @@ def getDocSize(path):
 def getModifiedTime(full_path):
     mtime = os.stat(full_path).st_mtime;
     file_modify_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(mtime));
-    return file_modify_time
+    return [file_modify_time, mtime];

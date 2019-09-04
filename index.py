@@ -50,7 +50,7 @@ def getfiles():
             fpath='./'+fpath;
     #
     #如果路径出现../开头或者路径中出现/../字样，报非法，返回首页。
-    if fpath.startswith("../") or (re.search("\/..\/", fpath)!=None):
+    if fpath.startswith("../") or (re.search("\/\.\.\/", fpath)!=None):
         return "<a href='/list'>Go Home</a> <br>Invalid '..' detected in fpath, please use valid path! <br>"+fpath;
     #
     fpathT=os.path.join(rootPath, fpath); #真实地址
@@ -78,26 +78,29 @@ def getfiles():
     if fpath!="./":
         arr=re.split('/',fpath);
         urlBack="/".join(arr[:-2])+"/";
-        htmlBack="<tr><td></td> <td>"+img['back']+" <a title='点击返回上一级' href='/list?fpath="+urlBack+"'>..</a>"+"</td>  <td></td>  <td></td> <tr>\n"
+        htmlBack="<tr class=header><td></td> <td>"+img['back']+" <a title='点击返回上一级' href='/list?fpath="+urlBack+"'>..</a>"+"</td>  <td></td>  <td></td> <tr>\n"
     #tr 文件和文件夹
     htmlF="";
     htmlD="";
     table1="<div class=wrap><fieldset> <legend>File List</legend> "+titlePath+"\
-<table><tr> <th></th> <th>FileName</th>   <th>Size</th>   <th>Modified</th>  </tr>\n"
+<table><tr class=header> <th></th> <th>FileName</th>   <th>Size</th>   <th>"+img['order']+"Modified</th>  </tr>\n"
     if os.path.isdir(fpathT):
         filelist = os.listdir(fpathT)
         for i in range(len(filelist)):
             file=filelist[i];
             url=os.path.join(fpath, file); #显示用虚拟文件路径
             urlT=os.path.join(fpathT, file); #获取都要用真实路径
-            fTime=getModifiedTime(urlT);#真实路径获取时间
+            #
+            arrTime=getModifiedTime(urlT);#真实路径获取时间
+            fTime=arrTime[0];
+            fTimeNum=arrTime[1];
             #
             if os.path.isfile(urlT): #type="file"
                 fSize=getDocSize(urlT);
-                htmlF+="<tr class=file> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+"</a></td>  <td>"+fSize+"</td>   <td>"+fTime+"</td>  </tr>\n"
+                htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+"</a></td>  <td>"+fSize+"</td>   <td>"+fTime+"</td>  </tr>\n"
             if os.path.isdir(urlT): #type="dir"
-                htmlD+="<tr class=dir> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>-</td>  <td>"+fTime+"</td>  </tr>\n"
-        #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]
+                htmlD+="<tr class=dir data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>-</td>  <td>"+fTime+"</td>  </tr>\n"
+    #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]
     return head+debug+table1+htmlBack+htmlF+htmlD+"</table> </fieldset></div>"+foot;
 
 
