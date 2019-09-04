@@ -1,3 +1,4 @@
+body{background: #F4F8F9;}
 div,p,h1,h4{margin:0; padding:0;}
 table{border-collapse: collapse;}
 tablr tr{padding:15px;}
@@ -29,13 +30,13 @@ table tr th{color:#999; font-size:80%;}
     background: red;
 }
 
-h4.root{background:#ddd;}
+h4.root{background:rgb(244, 248, 249); border: 1px solid #d6dadc;padding:0 5px;}
 h4.root a{ color:#000; font-weight:bold; text-decoration:none;}
 h4.root a:hover{color:red; text-decoration:underline;}
 
 .wrap{padding:10px 20px; width:80%; min-width:600px; margin:0 auto;}
-fieldset{border: 1px dashed #aaa;  background:#fff;}
+fieldset{border: 1px solid #E7E8EA;  background:#fff;}
 
-.footer, .footer a{color:#ddd;}
+.footer, .footer a{color:#ccc;}
 .footer a:hover{color:red;}
 
