@@ -35,7 +35,7 @@ v0.0.7
 
 '''
 foot='<div class="wrap footer"> \
-    <p>&copy;2019 webPan.py | <a target=_blank href="">Fork Me</a> | rootPath('+rootPath+')</p> </div> \
+    <p>&copy;2019 webPan.py | <a target=_blank href="https://github.com/DawnEve/webPan.py">Fork Me</a> | rootPath('+rootPath+')</p> </div> \
 </body> </html>'
 
 
