@@ -14,12 +14,13 @@ head='''
 </head>
 
 <body>
-<form action="/upload" method="post" enctype="multipart/form-data">
-	上传文件: <input type="file" name="file" />
-	<input type="hidden" name="uploadDir" value="." />
-	<input type="submit" value="上传文件" />
-</form>
-
+<div class=form>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        上传文件: <input type="file" name="file" />
+        <input type="hidden" name="uploadDir" value="." />
+        <input type="submit" value="上传文件" />
+    </form>
+</div>
 <script src="/static/js/main.js"></script>
 
 '''

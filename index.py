@@ -38,12 +38,22 @@ def getfiles():
     debug='';
     
     fpath = request.values.get('fpath', './') #获取用户输入的目录
+    if fpath[-1]!="/":
+        fpath+="/";
+    
+    #debug+=fpath;
+    
     #保护目录，保证只能传入相对路径
     if not fpath.startswith("."):
         if fpath.startswith("/"):
             fpath='.'+fpath;
         else:
             fpath='./'+fpath;
+    #
+    #如果路径出现../开头或者路径中出现/../字样，报非法，返回首页。
+    if fpath.startswith("../") or (re.search("\/..\/", fpath)!=None):
+        return "<a href='/list'>Go Home</a> <br>Invalid '..' detected in fpath, please use valid path! <br>"+fpath;
+    #
     fpathT=os.path.join(rootPath, fpath); #真实地址
     debug+="<div id=fpath style='display:none;'>"+fpath+"</div>";
     #生成顶部路径超链接
