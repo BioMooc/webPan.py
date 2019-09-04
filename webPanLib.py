@@ -15,11 +15,14 @@ head='''
 
 <body>
 <div class=form>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        上传文件: <input type="file" name="file" />
-        <input type="hidden" name="uploadDir" value="." />
-        <input type="submit" value="上传文件" />
-    </form>
+    <fieldset>
+        <legend>Upload File</legend>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" />
+            <input type="hidden" name="uploadDir" value="." />
+            <input type="submit" value="上传" />
+        </form>
+    </fieldset>
 </div>
 <script src="/static/js/main.js"></script>
 

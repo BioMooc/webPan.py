@@ -79,11 +79,12 @@ def getfiles():
     if fpath!="./":
         arr=re.split('/',fpath);
         urlBack="/".join(arr[:-2])+"/";
-        htmlBack="<tr> <td>"+img['back']+" <a title='点击返回上一级' href='/list?fpath="+urlBack+"'>..</a>"+"</td>  <td></td>  <td></td> <tr>\n"
+        htmlBack="<tr><td></td> <td>"+img['back']+" <a title='点击返回上一级' href='/list?fpath="+urlBack+"'>..</a>"+"</td>  <td></td>  <td></td> <tr>\n"
     #tr 文件和文件夹
     htmlF="";
     htmlD="";
-    table1="<table><tr> <th>FileName</th>   <th>Size</th>   <th>Modified</th>  </tr>\n"
+    table1="<div class=form><fieldset> <legend>File List</legend> "+titlePath+"\
+<table><tr> <th></th> <th>FileName</th>   <th>Size</th>   <th>Modified</th>  </tr>\n"
     if os.path.isdir(fpathT):
         filelist = os.listdir(fpathT)
         for i in range(len(filelist)):
@@ -94,11 +95,11 @@ def getfiles():
             #
             if os.path.isfile(urlT): #type="file"
                 fSize=getDocSize(urlT);
-                htmlF+="<tr class=file><td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+"</a></td>  <td>"+fSize+"</td>   <td>"+fTime+"</td>  </tr>\n"
+                htmlF+="<tr class=file> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+"</a></td>  <td>"+fSize+"</td>   <td>"+fTime+"</td>  </tr>\n"
             if os.path.isdir(urlT): #type="dir"
-                htmlD+="<tr class=dir><td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>-</td>  <td>"+fTime+"</td>  </tr>\n"
+                htmlD+="<tr class=dir> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>-</td>  <td>"+fTime+"</td>  </tr>\n"
         #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]
-    return head+debug+"<hr>"+titlePath+table1+htmlBack+htmlF+htmlD+"</table>";
+    return head+debug+"<br>"+table1+htmlBack+htmlF+htmlD+"</table> </fieldset></div>";
 
 
 # post方法：上传文件的 https://www.cnblogs.com/wl443587/p/10552542.html
