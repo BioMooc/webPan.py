@@ -1,4 +1,17 @@
-# 网盘 webPan.py 练手版
+# 网盘 webPan.py 练手版(Python3)
+
+OS: win10, Ubuntu 1804
+
+
+# 现有功能
+在webPanLib.py中定义根目录
+浏览和下载文件
+上传文件
+删除一个或多个文件
+
+
+
+
 
 # 运行方式
 1.下载项目；
@@ -6,20 +19,23 @@
 (1)webPanLib.py中的rootPath为存在的路径;
 (2)修改index.py最后一行为合适的ip和端口号;
 
-3.运行
-$ python index.py
-4.可以在浏览器打开看了。
-
-
-
-# 现有功能
-在webPanLib.py中定义根目录
-浏览和下载文件
-上传文件
+3.运行 $ python index.py  #会提示url
+4.在浏览器打开使用。
 
 
 
 
+
+# 项目文件结构
+|-- index.py 入口文件
+|-- webPanLib.py 定义函数和常量
+|-- static/
+    |--css/
+        |--webPan.css
+    |--js/
+        |--main.js
+|-- ReadMe.txt 说明文档
+#
 
 
 
@@ -41,9 +57,9 @@ v0.1.1 行按照时间排序
 v0.1.2 使用Rstudio风格界面色彩
 # # -----------------> git push origin master
 v0.1.3 递归获取文件夹大小
+v0.1.4 删除文件，js传输，ajax实现; 删除键红色字体显示;
 # commited here.
 
-删除文件，js传输，服务端接收和下载是一模一样的。
 
 
 
