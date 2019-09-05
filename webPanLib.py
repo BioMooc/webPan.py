@@ -4,6 +4,8 @@
 import os,time
 
 rootPath="F://Temp/"
+#rootPath="/home/wangjl/web/docs/"
+
 
 head='''
 <!DOCTYPE html>
@@ -12,7 +14,7 @@ head='''
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv=Content-Type content="text/html;charset=utf-8">
     <title>webPan.py - Mini网盘
-v0.1.4
+v0.1.5
     </title>
     <link rel="stylesheet" href="/static/css/webPan.css" />
 </head>

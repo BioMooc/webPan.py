@@ -41,7 +41,7 @@ def delete():
     fnameStr = request.form.get('filenames', '')  #获取文件名
     #return '{"del_msg0":"参数"}path=%s, filename=%s;' %(fpath, fname);
     
-    fnameArr=re.split('\|', fnameStr) #分为数组
+    fnameArr=re.split('\,', fnameStr) #分为数组
     rs=""
     for fname in fnameArr:
         #print(fname)

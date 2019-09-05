@@ -89,6 +89,7 @@ window.onload=function(){
     document.forms[0].getElementsByTagName('input')[1].value=fpath;
     //console.log("ok")
 	
+	//排序键
 	oBtnOrder.onclick=function(){
 		//1.排序
 		sortByTime(aTrD, order);
@@ -107,7 +108,10 @@ window.onload=function(){
 			oTable.append(arr[i]);
 		}
 	}
+	oBtnOrder.onclick(); //载入后就排序，最新的在最上层
 	
+	
+	//删除键
 	oBtnDelete.onclick=function(){
 		var aCheck=document.querySelectorAll("input[type=checkbox]");
 		var arr=[];
@@ -127,8 +131,13 @@ window.onload=function(){
 			alert(error);
 			return false;
 		}
-		filenames=arr.join("|");
+		filenames=arr.join(",");
 		// 获取参数，path， filenames
+		
+		//删除前二次确认
+		if(!confirm('确定要删除这些文件吗？('+filenames+')\n此操作不可以恢复！')) {
+			return false;
+		}
 		
 		//ajax向后台发送删除请求
 		ajax({
