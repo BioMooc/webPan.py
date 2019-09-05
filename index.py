@@ -8,6 +8,13 @@ from flask import request, send_from_directory,redirect,url_for
 server = flask.Flask(__name__)
 
 
+#首页跳转到文件浏览页面
+@server.route('/', methods=['get'])
+def index():
+    return redirect("/list");
+#
+
+
 #get方法：指定目录下载文件
 @server.route('/download', methods=['get'])
 def download():
@@ -24,11 +31,23 @@ def download():
         return '{"msg1":"请输入参数"}'
 #
 
-@server.route('/', methods=['get'])
-def index():
-    return redirect("/list");
-#
 
+#get方法：删除文件
+@server.route('/delete', methods=['get'])
+def delete():
+    fpath = request.values.get('path', '') #获取文件路径
+    fname = request.values.get('filename', '')  #获取文件名
+    fpathT = os.path.join(rootPath, fpath) #真实路径
+    if fname.strip() and fpath.strip():
+        #print(fname, fpath);
+        if os.path.isfile(os.path.join(fpathT,fname)): # and os.path.isdir(fpath):
+            return "Will delete: "+ os.path.join(fpathT, fname);
+            #return send_from_directory(fpathT, fname, as_attachment=True) #返回要下载的文件内容给客户端
+        else:
+            return '{"del_msg2":"参数不正确"}path=%s, filename=%s;' %(fpathT, fname);
+    else:
+        return '{"del_msg1":"请输入参数"}'
+#
 
 
 # get方法：查询当前路径下的所有文件
@@ -99,7 +118,8 @@ def getfiles():
                 fSize=getDocSize(urlT);
                 htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+"</a></td>  <td>"+fSize+"</td>   <td>"+fTime+"</td>  </tr>\n"
             if os.path.isdir(urlT): #type="dir"
-                htmlD+="<tr class=dir data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>-</td>  <td>"+fTime+"</td>  </tr>\n"
+                dSize=formatSize(dirSize(urlT));#递归计算文件夹大小
+                htmlD+="<tr class=dir data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>"+dSize+"</td>  <td>"+fTime+"</td>  </tr>\n"
     #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]
     return head+debug+table1+htmlBack+htmlF+htmlD+"</table> </fieldset></div>"+foot;
 

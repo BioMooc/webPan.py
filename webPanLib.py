@@ -60,16 +60,15 @@ def formatSize(bytes):
     except:
         print("传入的字节格式不对")
         return "Error"
-
     if kb >= 1024:
         M = kb / 1024
         if M >= 1024:
             G = M / 1024
-            return "%.2fG" % ( round(G,2) )
+            return "%.2fG" % (G)
         else:
-            return "%.2fM" % ( round(M,2) )
+            return "%.2fM" % (M)
     else:
-        return "%.2fkb" % ( round(kb,2) )
+        return "%.2fkb" % (kb)
 
 
 # 获取文件大小
@@ -79,6 +78,20 @@ def getDocSize(path):
         return formatSize(size)
     except Exception as err:
         print(err)
+
+
+# 获取文件夹大小，递归法，返回的是bytes，需要在最终返回值做k/m/g换算
+# by: Lin Yanling v0.1 2019.9.4
+# v0.2 改为os.path.join
+def dirSize(path):
+    content = os.listdir(path)
+    size = 0
+    for v in content:
+        if os.path.isfile('/'.join([path,v])):
+            size += os.path.getsize(os.path.join(path, v)); #'/'.join([path,v])
+        else:
+            size += dirSize(os.path.join(path, v)) #'/'.join([path,v])
+    return size
 #
 
 #获取修改时间

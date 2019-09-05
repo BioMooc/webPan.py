@@ -39,7 +39,11 @@ v0.0.9 ReadMe添加运行方式
 v0.1.0 添加github链接
 v0.1.1 行按照时间排序
 v0.1.2 使用Rstudio风格界面色彩
-#
+# # -----------------> git push origin master
+v0.1.3 递归获取文件夹大小
+# commited here.
+
+删除文件，js传输，服务端接收和下载是一模一样的。
 
 
 
@@ -50,4 +54,3 @@ todo:
 3.删除文件，使用js二次确认。
 4.多用户，回收站5天后删除。
 
-git push origin master
