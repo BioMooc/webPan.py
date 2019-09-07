@@ -1,6 +1,7 @@
 import flask, os,sys,time,re, urllib.parse
 from webPanLib import *
 from flask import request, send_from_directory,redirect,url_for,jsonify,make_response 
+import shutil
 
 #interface_path = os.path.dirname(__file__)
 #sys.path.insert(0, interface_path)  #将当前文件的父目录加入临时系统变量
@@ -16,6 +17,7 @@ def index():
 
 
 #download 指定目录下载文件
+# v0.2 怎么区分是否在新窗口打开？
 @server.route('/download', methods=['get'])
 def download():
     fpath = request.values.get('path', '') #获取文件路径
@@ -24,10 +26,10 @@ def download():
     if fname.strip() and fpath.strip():
         #print(fname, fpath);
         if os.path.isfile(os.path.join(fpathT,fname)): # and os.path.isdir(fpath):
-            response = make_response(send_from_directory(fpathT, fname, as_attachment=False))
-            response.headers["Content-Disposition"] = "attachment; filename="+fname.format(fpathT.encode().decode('utf-8'))
-            return response;
-            #return send_from_directory(fpathT, fname, as_attachment=True) #返回要下载的文件内容给客户端
+            #response = make_response(send_from_directory(fpathT, fname, as_attachment=False))
+            #response.headers["Content-Disposition"] = "attachment; filename="+fname.format(fpathT.encode().decode('utf-8'))
+            #return response;
+            return send_from_directory(fpathT, fname, as_attachment=False) #返回要下载的文件内容给客户端
         else:
             return '{"msg2":"参数不正确"}path=%s, filename=%s;' %(fpathT, fname);
     else:
@@ -38,6 +40,7 @@ def download():
 
 
 # 删除文件 ajax方式
+# 删除到dustbin文件夹
 @server.route('/delete', methods=['POST'])
 def delete():
     fpath = request.form.get('path', '') #获取文件路径
@@ -48,11 +51,22 @@ def delete():
     rs=""
     for fname in fnameArr:
         #print(fname)
-        fpathT = os.path.join(rootPath, fpath)#真实路径
+        fpathT = os.path.abspath( os.path.join(rootPath, fpath) ) #真实路径
         if os.path.isfile(os.path.join(fpathT,fname)): # and os.path.isdir(fpath):
             curFile=os.path.join(fpathT, fname);
-            #os.remove(curFile);
-            rs+=fname+', ';
+            #如果不存在垃圾箱，则新建垃圾箱
+            dustbin=os.path.abspath( os.path.join(rootPath, "dustbin") );
+            if not os.path.exists(dustbin):
+                os.mkdir(dustbin)
+            #如果不在垃圾箱，则移动到垃圾箱
+            
+            #rs+="; dustbin="+dustbin +"; fpath="+fpathT+'; ';
+            if(dustbin!=fpathT):
+                shutil.move(curFile, os.path.join(dustbin,fname) );
+                rs+=fname+' moved to /dustbin/, ';
+            else:
+                os.remove(curFile);
+                rs+=fname+' removed, ';
         else:
             return jsonify({"msg": "参数不正确", "path": fpath, 'filename': fname});
     return jsonify({'msg': "deleted!", 'filename': rs});

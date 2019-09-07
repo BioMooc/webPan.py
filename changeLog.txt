@@ -18,8 +18,8 @@ v0.1.6 修改readme.txt为md
 v0.1.7 上传文件，没有同名，则不修改名字，否则加上时间前缀;
 # # -----------------> git push origin master
 v0.1.8 改名字为static/images/webPan_py.png
+v0.1.9 删除到回收站,在回收站删除则是真的删除;
 # commited here.
-
 
 
 
@@ -27,7 +27,7 @@ v0.1.8 改名字为static/images/webPan_py.png
 todo:
 4.多用户
 5.回收站5天后删除。
-7.删除到回收站，在回收站删除则是真的删除;
+
 
 
 done:
