@@ -48,7 +48,7 @@ def delete():
         fpathT = os.path.join(rootPath, fpath)#真实路径
         if os.path.isfile(os.path.join(fpathT,fname)): # and os.path.isdir(fpath):
             curFile=os.path.join(fpathT, fname);
-            os.remove(curFile);
+            #os.remove(curFile);
             rs+=fname+', ';
         else:
             return jsonify({"msg": "参数不正确", "path": fpath, 'filename': fname});
@@ -164,3 +164,4 @@ def downloader(filename):
 if __name__ == '__main__':
     server.debug = True # 设置调试模式，生产模式的时候要关掉debug
     server.run(host="127.0.0.1",port=8005) #default
+    #server.run(host="192.168.2.120",port=8000) #ubuntu
