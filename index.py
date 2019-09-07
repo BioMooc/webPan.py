@@ -1,6 +1,6 @@
 import flask, os,sys,time,re, urllib.parse
 from webPanLib import *
-from flask import request, send_from_directory,redirect,url_for,jsonify 
+from flask import request, send_from_directory,redirect,url_for,jsonify,make_response 
 
 #interface_path = os.path.dirname(__file__)
 #sys.path.insert(0, interface_path)  #将当前文件的父目录加入临时系统变量
@@ -24,7 +24,10 @@ def download():
     if fname.strip() and fpath.strip():
         #print(fname, fpath);
         if os.path.isfile(os.path.join(fpathT,fname)): # and os.path.isdir(fpath):
-            return send_from_directory(fpathT, fname, as_attachment=True) #返回要下载的文件内容给客户端
+            response = make_response(send_from_directory(fpathT, fname, as_attachment=False))
+            response.headers["Content-Disposition"] = "attachment; filename="+fname.format(fpathT.encode().decode('utf-8'))
+            return response;
+            #return send_from_directory(fpathT, fname, as_attachment=True) #返回要下载的文件内容给客户端
         else:
             return '{"msg2":"参数不正确"}path=%s, filename=%s;' %(fpathT, fname);
     else:
