@@ -143,7 +143,9 @@ def upload():
     
     if fname:
         t = time.strftime('%Y%m%d%H%M%S')
-        new_fname = os.path.join(rootPath, uploadDir, t +'_'+ fname.filename);
+        new_fname = os.path.join(rootPath, uploadDir, fname.filename);
+        if os.path.exists(new_fname): #如果存在，则加时间戳前缀
+            new_fname = os.path.join(rootPath, uploadDir, t +'_'+ fname.filename);
         fname.save(new_fname)  #保存文件到指定路径
         url=url_for('getfiles',fpath=uploadDir );
         #return url;
