@@ -16,9 +16,10 @@ v0.1.4 删除文件，js传输，ajax实现; 删除键红色字体显示;
 v0.1.5 删除文件前使用js二次确认
 v0.1.6 修改readme.txt为md
 v0.1.7 上传文件，没有同名，则不修改名字，否则加上时间前缀;
-# # -----------------> git push origin master
 v0.1.8 改名字为static/images/webPan_py.png
 v0.1.9 删除到回收站,在回收站删除则是真的删除;
+# # -----------------> git push origin master
+v0.2.0 模仿Ubuntu某一个搜索页,添加背景点
 # commited here.
 
 

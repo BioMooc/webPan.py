@@ -1,4 +1,13 @@
-body{background: #F4F8F9;}
+/*
+* style like Ubuntu(https://packages.ubuntu.com/search?keywords=openssl) and RStudio server.
+* https://packages.ubuntu.com/search?keywords=openssl
+*/
+
+body{
+		background-color: #F4F8F9; 
+		background-image:url(/static/images/background-dots.png);
+}
+
 div,p,h1,h4{margin:0; padding:0;}
 table{border-collapse: collapse;}
 tablr tr{padding:15px;}
@@ -12,7 +21,7 @@ table tr a{color: #00a; text-decoration: none;
     min-width: 50px;
     display: inline-block;
 }
-table tr a:hover{text-decoration:underline; color:red;}
+table tr a:hover{text-decoration:underline; color:#DD4814;}
 
 table tr th{color:#999; font-size:80%;}
 
@@ -32,7 +41,7 @@ table tr th{color:#999; font-size:80%;}
 
 h4.root{background:rgb(244, 248, 249); border: 1px solid #d6dadc;padding:0 5px;}
 h4.root a{ color:#000; font-weight:bold; text-decoration:none;}
-h4.root a:hover{color:red; text-decoration:underline;}
+h4.root a:hover{color:#DD4814; text-decoration:underline;}
 h4.root span{ border-right:1px solid #d6dadc; padding:0 5px;}
 h4.root span a{background:#FFd8d9; color:red; padding:0px 3px; border-radius:5px;}
 h4.root span a:hover{background:#f00;color:white;}
@@ -41,5 +50,5 @@ h4.root span a:hover{background:#f00;color:white;}
 fieldset{border: 1px solid #E7E8EA;  background:#fff;}
 
 .footer, .footer a{color:#ccc;}
-.footer a:hover{color:red;}
+.footer a:hover{color:#DD4814;}
 

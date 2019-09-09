@@ -29,6 +29,7 @@ todo 加入多用户功能，文件能设置私有、公开(需要使用数据�
 # 运行方式
 1. 下载项目；
 2. 设置 
+ - 安装python3的包 $ pip install flask
  - webPanLib.py中的rootPath为存在的路径;
  - 修改index.py最后一行为合适的ip和端口号;
 3. 运行 $ python index.py  #会提示url
@@ -47,6 +48,7 @@ todo 加入多用户功能，文件能设置私有、公开(需要使用数据�
         |--webPan.css
     |--js/
         |--main.js
+    |--images/
 |-- ReadMe.txt 说明文档
 ```
 
