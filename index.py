@@ -109,6 +109,7 @@ def delete():
 
 
 # get方法：查询当前路径下的所有文件
+# v0.2 对文件按时间倒序排序
 @server.route('/list', methods=['get'])
 def getfiles():
     debug='';
@@ -163,21 +164,40 @@ def getfiles():
 <table><tr class=header> <th></th> <th>FileName</th>   <th>Size</th>   <th>"+img['order']+"Modified</th>  </tr>\n"
     if os.path.isdir(fpathT):
         filelist = os.listdir(fpathT)
+        #为文件增加时间2列，类型列，大小,url
+        filelist2d=[]
         for i in range(len(filelist)):
             file=filelist[i];
             url=os.path.join(fpath, file); #显示用虚拟文件路径
             urlT=os.path.join(fpathT, file); #获取都要用真实路径
+            arrTime=getModifiedTime(urlT);#真实路径获取时间 ['2019-04-17 09:13:35', 1555463615.2421255]
             #
-            arrTime=getModifiedTime(urlT);#真实路径获取时间
-            fTime=arrTime[0];
-            fTimeNum=arrTime[1];
+            type=''
+            if os.path.isfile(urlT):
+                type='file'
+                Size=getDocSize(urlT);
+            elif os.path.isdir(urlT):
+                type='dir'
+                Size=formatSize(dirSize(urlT));#递归计算文件夹大小
+            #合并
+            filelist2d.append([file, arrTime[0],arrTime[1], type,Size,url])
+        filelist2d.sort(key=lambda x:-x[2]) #按时间降序
+        print('3===>', filelist2d,'\n')
+        
+        for i in range(len(filelist2d)):
+            arr=filelist2d[i]
+            #['tmp.R', '2019-10-25 13:28:17', 1571981297.2041583, 'file', '17.36kb', './tmp.R'],
+            file=arr[0];
+            fTime=arr[1];
+            fTimeNum=arr[2];
+            fType=arr[3]
+            Size=arr[4]
+            url=arr[5]
             #
-            if os.path.isfile(urlT): #type="file"
-                fSize=getDocSize(urlT);
-                htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+"</a></td>  <td>"+fSize+"</td>   <td>"+fTime+"</td>  </tr>\n"
-            if os.path.isdir(urlT): #type="dir"
-                dSize=formatSize(dirSize(urlT));#递归计算文件夹大小
-                htmlD+="<tr class=dir data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>"+dSize+"</td>  <td>"+fTime+"</td>  </tr>\n"
+            if fType=='file': #type="file"
+                htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+"</a></td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"
+            elif fType=='dir': #type="dir"
+                htmlD+="<tr class=dir data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>"+Size+"</td>  <td>"+fTime+"</td>  </tr>\n"
     #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]
     return head+debug+table1+htmlBack+htmlF+htmlD+"</table> </fieldset></div>"+foot;
 

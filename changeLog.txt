@@ -20,12 +20,12 @@ v0.1.8 改名字为static/images/webPan_py.png
 v0.1.9 删除到回收站,在回收站删除则是真的删除;
 v0.2.0 模仿Ubuntu某一个搜索页,添加背景点
 v0.2.1 更新ReadMe.md
-# # -----------------> git push origin master
 v0.2.2 支持跨域访问;支持根据运行环境，设置变量和运行端口；
 	跨域路由是/file/文件相对路径,比如 http://127.0.0.1:8005/file/tmp.R
 	参考: https://www.cnblogs.com/seven-007/p/8244799.html
+# # -----------------> git push origin master
+v0.2.3 后端自动排序，最新的文件排上面
 # commited here.
-#
 
 
 
