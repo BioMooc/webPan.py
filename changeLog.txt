@@ -23,9 +23,10 @@ v0.2.1 更新ReadMe.md
 v0.2.2 支持跨域访问;支持根据运行环境，设置变量和运行端口；
 	跨域路由是/file/文件相对路径,比如 http://127.0.0.1:8005/file/tmp.R
 	参考: https://www.cnblogs.com/seven-007/p/8244799.html
-# # -----------------> git push origin master
 v0.2.3 后端自动排序，最新的文件排上面
+v0.2.4 注释掉一句调试输出
 # commited here.
+# # -----------------> git push origin master
 
 
 

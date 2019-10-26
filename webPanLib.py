@@ -20,7 +20,7 @@ head='''
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv=Content-Type content="text/html;charset=utf-8">
     <title>webPan.py - Mini网盘
-v0.2.0
+v0.2.4
     </title>
     <link rel="stylesheet" href="/static/css/webPan.css" />
 </head>

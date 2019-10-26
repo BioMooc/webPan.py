@@ -9,8 +9,8 @@ todo 加入多用户功能，文件能设置私有、公开(需要使用数据�
 
 # 环境
 - depend: Python3 flask
-- version: 0.2
 - test OS: win10, Ubuntu 1804
+- version: 0.2
 ```
 C:\Users\admin>flask --version
 Flask 1.0.2
@@ -30,8 +30,8 @@ Python 3.6.8 (default, Aug 20 2019, 17:12:48)
 - 浏览和下载文件
 - 上传文件
 - 删除一个或多个文件到回收站/dustbin/，在回收站删除则彻底删除;
-
-
+- 支持跨域请求静态文件，API是 /file/xx.mp3
+- todo 新建文件夹
 
 
 

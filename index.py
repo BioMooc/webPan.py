@@ -182,7 +182,7 @@ def getfiles():
             #合并
             filelist2d.append([file, arrTime[0],arrTime[1], type,Size,url])
         filelist2d.sort(key=lambda x:-x[2]) #按时间降序
-        print('3===>', filelist2d,'\n')
+        #print('3===>', filelist2d,'\n')
         
         for i in range(len(filelist2d)):
             arr=filelist2d[i]
