@@ -29,12 +29,44 @@ def download():
             #response = make_response(send_from_directory(fpathT, fname, as_attachment=False))
             #response.headers["Content-Disposition"] = "attachment; filename="+fname.format(fpathT.encode().decode('utf-8'))
             #return response;
-            return send_from_directory(fpathT, fname, as_attachment=False) #返回要下载的文件内容给客户端
+            return send_from_directory(fpathT, fname, as_attachment=True) #返回要下载的文件内容给客户端
         else:
             return '{"msg2":"参数不正确"}path=%s, filename=%s;' %(fpathT, fname);
     else:
         return '{"msg1":"请输入参数"}'
 #
+
+
+##############
+# 支持跨域访问
+# version: 0.2
+##############
+#路径名字不能是/static/,因为它是内部定义过的静态文件路径
+@server.route('/file/<path:filePath>', methods=['get'])
+def audio(filePath):
+    #fpath = request.values.get('path', '') #获取文件路径
+    #fname = request.values.get('filename', '')  #获取文件名
+    fpathT = os.path.join(rootPath, filePath) #真实路径
+    print(fpathT)
+    if filePath.strip():
+        if os.path.isfile(fpathT):
+            blob=''
+            try:
+                with open( fpathT, 'rb') as file:
+                    blob = file.read()
+            except Exception as e:
+                print(e)
+                pass
+            #
+            res = make_response(blob)
+            res.mimetype='application/octet-stream'
+            res.headers['Access-Control-Allow-Origin'] = '*'
+            return res;
+        else:
+            return '{"msg2":"参数不正确"}path=%s, filename=%s;' %(fpathT, fname);
+    else:
+        return '{"msg1":"请输入参数"}'
+#ajax test OK: http://127.0.0.1:8005/file/tmp.R
 
 
 
@@ -182,5 +214,11 @@ def downloader(filename):
 # run the app
 if __name__ == '__main__':
     server.debug = True # 设置调试模式，生产模式的时候要关掉debug
-    server.run(host="127.0.0.1",port=8005) #default
-    #server.run(host="192.168.2.120",port=8000) #ubuntu
+    env=sys.platform #"win32"测试环境;  "linux"生产环境
+    print('env=',env)
+    if env=='linux':
+        server.run(host="192.168.2.120",port=8000) #ubuntu
+    elif env=='win32':
+        server.run(host="127.0.0.1",port=8005) #windows
+        
+        

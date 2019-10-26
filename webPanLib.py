@@ -3,8 +3,14 @@
 
 import os,time
 
-rootPath="F://Temp/"
-#rootPath="/home/wangjl/web/docs/"
+#设置变量
+import sys
+env=sys.platform #"win32"测试环境;  "linux"生产环境
+#print('env=',env)
+if env=='linux':
+    rootPath="/home/wangjl/web/docs/" #ubuntu
+elif env=='win32':
+    rootPath="F://Temp/" #windows
 
 
 head='''
