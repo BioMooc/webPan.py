@@ -139,7 +139,7 @@ def getfiles():
     arr=re.split(sep, fpath);
     #arr to a links
     url="/list?fpath="
-    urlPath="<a href=/list>(RootDir)</a>/";
+    urlPath="<a href=/list>(RootDir)</a>/";    
     for i in range(len(arr)-1 ):
         if arr[i]=='.':
             continue;
@@ -161,7 +161,7 @@ def getfiles():
     htmlF="";
     htmlD="";
     table1="<div class=wrap><fieldset> <legend>File List</legend> "+titlePath+"\
-<table><tr class=header> <th></th> <th>FileName</th>   <th>Size</th>   <th>"+img['order']+"Modified</th>  </tr>\n"
+<table><tr class=header> <th></th> <th>FileName</th>   <th>Size</th>   <th>"+img['order']+"Modified</th> </tr>\n"
     if os.path.isdir(fpathT):
         filelist = os.listdir(fpathT)
         #为文件增加时间2列，类型列，大小,url
@@ -195,7 +195,10 @@ def getfiles():
             url=arr[5]
             #
             if fType=='file': #type="file"
-                htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+"</a></td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"
+                # 外链地址
+                urlPath_out="<a href=/file/"+fpath+file+"><i class='fa fa-external-link' style='margin-left:10px;' title='外链 - 请右击复制'></i></a>";
+                
+                htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+' '+urlPath_out+"</a></td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"
             elif fType=='dir': #type="dir"
                 htmlD+="<tr class=dir data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>"+Size+"</td>  <td>"+fTime+"</td>  </tr>\n"
     #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]

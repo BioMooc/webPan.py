@@ -20,14 +20,18 @@ head='''
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv=Content-Type content="text/html;charset=utf-8">
     <title>webPan.py - Mini网盘
-v0.2.4
+v0.2.5
     </title>
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
     <link rel="stylesheet" href="/static/css/webPan.css" />
+    
+    <!-- 外链图标 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 
 <body>
 <div class="wrap">
-    <h1>webPan.py</h1>
+    <h1><img src="/static/images/webpan_simple.png" style="height:40px; padding:0 10px;">webPan.py</h1>
 </div>
 
 
@@ -44,7 +48,7 @@ v0.2.4
 
 '''
 foot='<div class="wrap footer"> \
-    <p>&copy;2019 webPan.py | <a target=_blank href="https://github.com/DawnEve/webPan.py">Fork Me</a> | rootPath('+rootPath+')</p> </div> \
+    <p>&copy;2020 webPan.py  | <a target=_blank href="https://github.com/DawnEve/webPan.py">Fork Me</a> | rootPath('+rootPath+')</p> </div> \
 <script src="/static/js/main.js"></script> \
 </body> </html>'
 
