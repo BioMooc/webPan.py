@@ -196,7 +196,7 @@ def getfiles():
             #
             if fType=='file': #type="file"
                 # 外链地址
-                urlPath_out="<a href=/file/"+fpath+file+"><i class='fa fa-external-link' style='margin-left:10px;' title='外链 - 请右击复制'></i></a>";
+                urlPath_out="<a href='/file/"+fpath+file+"'><i class='fa fa-external-link' style='margin-left:10px;' title='外链 - 请右击复制'></i></a>";
                 
                 htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+' '+urlPath_out+"</a></td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"
             elif fType=='dir': #type="dir"
