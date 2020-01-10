@@ -41,7 +41,8 @@ v0.2.5
         <form action="/upload" method="post" enctype="multipart/form-data">
             <input type="file" name="file" />
             <input type="hidden" name="uploadDir" value="." />
-            <input type="submit" value="上传" />
+            <input type="submit" value="上传" /> 
+            <span style='margin-left:30px;'>注意: 本网盘只是临时中转，请及时备份！超过一周的文件可能随时会被<b style='color:red;'>删除</b>！</span>
         </form>
     </fieldset>
 </div>

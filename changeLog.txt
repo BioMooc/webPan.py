@@ -30,6 +30,7 @@ v0.2.6 fix 外链遇到空格断开bug
 v0.2.7 添加图片预览链接和页面
 	http://www.fontawesome.com.cn/icons/external-link/
 	http://www.fontawesome.com.cn/icons/pictuer-o/
+v0.2.8 添加7天删除提醒文字
 # commited here.
 # # -----------------> git push origin master
 
