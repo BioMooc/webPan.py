@@ -27,6 +27,9 @@ v0.2.3 后端自动排序，最新的文件排上面
 v0.2.4 注释掉一句调试输出
 v0.2.5 为文件添加外链及图标，页面顶部添加logo图
 v0.2.6 fix 外链遇到空格断开bug
+v0.2.7 添加图片预览链接和页面
+	http://www.fontawesome.com.cn/icons/external-link/
+	http://www.fontawesome.com.cn/icons/pictuer-o/
 # commited here.
 # # -----------------> git push origin master
 

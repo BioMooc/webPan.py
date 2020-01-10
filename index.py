@@ -1,6 +1,6 @@
 import flask, os,sys,time,re, urllib.parse
 from webPanLib import *
-from flask import request, send_from_directory,redirect,url_for,jsonify,make_response 
+from flask import request, send_from_directory,redirect,url_for,jsonify,make_response,render_template
 import shutil
 
 #interface_path = os.path.dirname(__file__)
@@ -34,6 +34,17 @@ def download():
             return '{"msg2":"参数不正确"}path=%s, filename=%s;' %(fpathT, fname);
     else:
         return '{"msg1":"请输入参数"}'
+#
+
+
+
+
+
+# 预览图片
+@server.route('/show/', methods=['GET'])
+def show_photo():
+    url = request.values.get('url', '')
+    return render_template("show.html", url=url)
 #
 
 
@@ -198,7 +209,15 @@ def getfiles():
                 # 外链地址
                 urlPath_out="<a href='/file/"+fpath+file+"'><i class='fa fa-external-link' style='margin-left:10px;' title='外链 - 请右击复制'></i></a>";
                 
-                htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+' '+urlPath_out+"</a></td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"
+                # 预览地址
+                picViewPath=""
+                # 图片的后缀
+                arr=re.split('\.', file)
+                suffix=arr[len(arr)-1].lower()
+                if suffix in ['png', 'jpg','jpeg','bmp', 'gif']:
+                     picViewPath="<a target=_blank href='/show/?url=/file/"+fpath+file+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
+                
+                htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+'</a> '+urlPath_out+picViewPath+"</td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"
             elif fType=='dir': #type="dir"
                 htmlD+="<tr class=dir data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>"+Size+"</td>  <td>"+fTime+"</td>  </tr>\n"
     #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]

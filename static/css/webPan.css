@@ -18,7 +18,7 @@ table tr td {padding:0 10px;
     text-overflow: ellipsis;
 }
 table tr a{color: #00a; text-decoration: none;
-    min-width: 50px;
+    /*min-width: 50px;*/
     display: inline-block;
 }
 table tr a:hover{text-decoration:underline; color:#DD4814;}
