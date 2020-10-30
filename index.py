@@ -232,13 +232,20 @@ def upload():
     uploadDir = request.form.get('uploadDir','./') #获取上传的路径
     #return uploadDir;
     
+    
     if fname:
+        url=url_for('getfiles',fpath=uploadDir );
+        
+        # fix: 禁止文件名包含&，否则会导致下载失败
+        if re.search('&', fname.filename) != None:
+            #return '{"msg": "文件名不能包含特殊符号 & (请去掉该符号后重新上传)"}'
+            return '<meta http-equiv="refresh" content="3;url='+url+'">'+"<span style='color:red;'>Failed!</span> <br><b style='font-size:30px;'>delete & in your filename and upload again.</b> <br>Returning to list in 5 seconds.<br>";
+        
         t = time.strftime('%Y%m%d%H%M%S')
         new_fname = os.path.join(rootPath, uploadDir, fname.filename);
         if os.path.exists(new_fname): #如果存在，则加时间戳前缀
             new_fname = os.path.join(rootPath, uploadDir, t +'_'+ fname.filename);
         fname.save(new_fname)  #保存文件到指定路径
-        url=url_for('getfiles',fpath=uploadDir );
         #return url;
         return '<meta http-equiv="refresh" content="3;url='+url+'">'+"Upload Success!. Returning to list in 3 seconds.<br>";
     else:
