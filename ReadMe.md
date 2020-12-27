@@ -33,6 +33,7 @@ Python 3.6.8 (default, Aug 20 2019, 17:12:48)
 - 支持跨域请求静态文件，API是 /file/xx.mp3
 	已经添加外链，并图标显示，可右击复制外链。
 	例如，网盘显示为 audio/xx.mp3的文件，可以外网访问 init('http://y.biomooc.com:8000/file/audio/xx.mp3')
+- 支持预览pdf
 - todo 新建文件夹
 - todo 多用户支持
 
@@ -49,7 +50,7 @@ Python 3.6.8 (default, Aug 20 2019, 17:12:48)
  - 修改index.py最后一行为合适的ip和端口号(有默认值，但是不一定可用);
 3. 进入目录，运行 $ python index.py  #会提示url
 4. 在浏览器打开url。
-
+5. 单击文件下载。
 
 
 

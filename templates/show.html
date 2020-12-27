@@ -5,7 +5,7 @@
 	<link rel="shortcut icon" href="/static/images/favicon.ico">
 	<meta http-equiv=Content-Type content="text/html;charset=utf-8">
 	<title>webPan.py - Mini网盘
-v0.2.5
+v0.3.0
     </title>
 </head>
 
@@ -22,7 +22,7 @@ if( ['png', 'jpg','jpeg','bmp', 'gif'].indexOf(suffix)>=0 ){
 }else if( ['pdf'].indexOf(suffix)>=0 ){
 	//html='<embed width="100%" height="100%" src="'+fileName+'"> </embed>'
 	//html='<iframe src="'+fileName+'" width="800" height="600"></iframe> '
-	html='<object data="'+fileName+'" type="application/pdf" width="800" height="600"></object> '
+	html='<object data="'+fileName+'" type="application/pdf" width="90%" height="700px"></object> '
 }
 
 

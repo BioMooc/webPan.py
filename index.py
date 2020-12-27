@@ -1,8 +1,9 @@
+#coding=utf-8
 import flask, os,sys,time,re, urllib.parse
 from webPanLib import *
 from flask import request, send_from_directory,redirect,url_for,jsonify,make_response,render_template
 import shutil
-
+from flask import send_file
 #interface_path = os.path.dirname(__file__)
 #sys.path.insert(0, interface_path)  #将当前文件的父目录加入临时系统变量
 
@@ -51,6 +52,7 @@ def show_photo():
 ##############
 # 支持跨域访问
 # version: 0.2
+# version: 0.3 支持pdf预览
 ##############
 #路径名字不能是/static/,因为它是内部定义过的静态文件路径
 @server.route('/file/<path:filePath>', methods=['get'])
@@ -61,18 +63,22 @@ def audio(filePath):
     print(fpathT)
     if filePath.strip():
         if os.path.isfile(fpathT):
-            blob=''
-            try:
-                with open( fpathT, 'rb') as file:
-                    blob = file.read()
-            except Exception as e:
-                print(e)
-                pass
-            #
-            res = make_response(blob)
-            res.mimetype='application/octet-stream'
-            res.headers['Access-Control-Allow-Origin'] = '*'
-            return res;
+            #blob=''
+            #try:
+            #    with open( fpathT, 'rb') as file:
+            #        blob = file.read()
+            #except Exception as e:
+            #    print(e)
+            #    pass
+            
+            #res = make_response(blob)
+            #res.mimetype='application/octet-stream'
+            #res.headers['Access-Control-Allow-Origin'] = '*'
+            #return res;
+            
+            response = make_response(send_file(filename_or_fp= fpathT, as_attachment=False))
+            response.headers["Access-Control-Allow-Origin"]="*"
+            return response
         else:
             return '{"msg2":"参数不正确"}path=%s, filename=%s;' %(fpathT, fname);
     else:
@@ -150,7 +156,7 @@ def getfiles():
     arr=re.split(sep, fpath);
     #arr to a links
     url="/list?fpath="
-    urlPath="<a href=/list>(RootDir)</a>/";    
+    urlPath="<a id=root href=/list>/RootDir</a>/";    
     for i in range(len(arr)-1 ):
         if arr[i]=='.':
             continue;
@@ -214,7 +220,7 @@ def getfiles():
                 # 图片的后缀
                 arr=re.split('\.', file)
                 suffix=arr[len(arr)-1].lower()
-                if suffix in ['png', 'jpg','jpeg','bmp', 'gif']:
+                if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'pdf', "PDF"]:
                      picViewPath="<a target=_blank href='/show/?url=/file/"+fpath+file+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
                 
                 htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+'</a> '+urlPath_out+picViewPath+"</td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"
