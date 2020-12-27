@@ -37,6 +37,7 @@ v0.3.0 支持预览pdf: send_file
 v0.3.1 底部添加版本号; 预览svg图片;
 v0.3.2 预览优化：图片、pdf、html预览更原生态
 	中间还需要一步跳转url，怎么能不跳转呢？
+v0.3.3 预览mp3,mp4
 # commited here.
 # # -----------------> git push origin master: dawneve
 

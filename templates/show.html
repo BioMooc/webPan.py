@@ -15,7 +15,7 @@ var arr=fileName.split(/\./);
 var suffix=arr[arr.length-1].toLowerCase();
 var html="";
 
-if( ['png', 'jpg','jpeg','bmp', 'gif', 'pdf', 'PDF', 'html', 'svg'].indexOf(suffix)>=0 ){
+if( ['png', 'jpg','jpeg','bmp', 'gif', 'pdf', 'PDF', 'html', 'svg', 'mp3', 'mp4'].indexOf(suffix)>=0 ){
 	//html="<img src='"+fileName+"'>";
 	html='<meta http-equiv="refresh" content="0;url='+fileName+'">'
 }

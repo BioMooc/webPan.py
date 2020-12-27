@@ -13,7 +13,7 @@ if env=='linux':
 elif env=='win32':
     rootPath="F://Temp/" #windows
 
-version="v0.3.2"
+version="v0.3.3"
 
 
 head='''
