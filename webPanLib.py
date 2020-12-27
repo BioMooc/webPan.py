@@ -13,7 +13,7 @@ if env=='linux':
 elif env=='win32':
     rootPath="F://Temp/" #windows
 
-
+version="v0.3.1"
 head='''
 <!DOCTYPE html>
 <html>
@@ -21,7 +21,7 @@ head='''
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv=Content-Type content="text/html;charset=utf-8">
     <title>webPan.py - Mini网盘
-v0.3.0
+%s
     </title>
     <link rel="shortcut icon" href="/static/images/favicon.ico">
     <link rel="stylesheet" href="/static/css/webPan.css" />
@@ -49,10 +49,15 @@ v0.3.0
 </div>
 
 '''
+head=head % version;
+
 foot='<div class="wrap footer"> \
-    <p>&copy;2020 webPan.py  | <a target=_blank href="https://github.com/DawnEve/webPan.py">Fork Me</a> | rootPath('+rootPath+')</p> </div> \
+    <p>&copy;2020 webPan.py \
+%s \
+| <a target=_blank href="https://github.com/DawnEve/webPan.py">Fork Me</a> | RootPath('+rootPath+')</p> </div> \
 <script src="/static/js/main.js"></script> \
 </body> </html>'
+foot=foot % version;
 
 
 img={

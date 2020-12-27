@@ -34,6 +34,7 @@ v0.2.8 添加7天删除提醒文字
 v0.2.9 fix bug: 禁止上传文件名含有&符号
 v0.3.0 支持预览pdf: send_file
 	中文路径不支持怎么办？不知道哪一条通过的: py第一行加上 #coding=utf-8
+v0.3.1 底部添加版本号; 预览svg图片;
 # commited here.
 # # -----------------> git push origin master: dawneve
 
