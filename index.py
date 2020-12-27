@@ -220,7 +220,7 @@ def getfiles():
                 # 图片的后缀
                 arr=re.split('\.', file)
                 suffix=arr[len(arr)-1].lower()
-                if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'svg', 'pdf', "PDF"]:
+                if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'svg', 'pdf', "PDF", 'html']:
                      picViewPath="<a target=_blank href='/show/?url=/file/"+fpath+file+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
                 
                 htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+'</a> '+urlPath_out+picViewPath+"</td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"

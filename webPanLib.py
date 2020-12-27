@@ -13,7 +13,9 @@ if env=='linux':
 elif env=='win32':
     rootPath="F://Temp/" #windows
 
-version="v0.3.1"
+version="v0.3.2"
+
+
 head='''
 <!DOCTYPE html>
 <html>

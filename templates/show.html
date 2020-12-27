@@ -4,9 +4,7 @@
 	<meta name="viewport" content="width=device-width" />
 	<link rel="shortcut icon" href="/static/images/favicon.ico">
 	<meta http-equiv=Content-Type content="text/html;charset=utf-8">
-	<title>webPan.py - Mini网盘
-v0.3.0
-    </title>
+	<title>webPan.py - Mini网盘</title>
 </head>
 
 <body>
@@ -17,13 +15,14 @@ var arr=fileName.split(/\./);
 var suffix=arr[arr.length-1].toLowerCase();
 var html="";
 
-if( ['png', 'jpg','jpeg','bmp', 'gif', 'svg'].indexOf(suffix)>=0 ){
-	html="<img src='"+fileName+"'>";
-}else if( ['pdf'].indexOf(suffix)>=0 ){
+if( ['png', 'jpg','jpeg','bmp', 'gif', 'pdf', 'PDF', 'html', 'svg'].indexOf(suffix)>=0 ){
+	//html="<img src='"+fileName+"'>";
+	html='<meta http-equiv="refresh" content="0;url='+fileName+'">'
+}
+//else if( ['pdf'].indexOf(suffix)>=0 ){
 	//html='<embed width="100%" height="100%" src="'+fileName+'"> </embed>'
 	//html='<iframe src="'+fileName+'" width="800" height="600"></iframe> '
-	html='<object data="'+fileName+'" type="application/pdf" width="90%" height="700px"></object> '
-}
+//}
 
 
 if(html!=""){
