@@ -9,11 +9,13 @@ import sys
 env=sys.platform #"win32"测试环境;  "linux"生产环境
 #print('env=',env)
 if env=='linux':
-    rootPath="/home/wangjl/web/docs/" #ubuntu
+    rootPath="/home/wangjl/data/web/docs/" #ubuntu
 elif env=='win32':
-    rootPath="F://Temp/" #windows
+    #rootPath="F://Temp/" #windows
+    #rootPath="G://baiduDisk//" #windows
+    rootPath="G://xampp//htdocs//DawnScholar//audio//HarryPotter1-7StephenFry" #windows
 
-version="v0.3.3"
+version="v0.3.4"
 
 
 head='''
@@ -28,8 +30,10 @@ head='''
     <link rel="shortcut icon" href="/static/images/favicon.ico">
     <link rel="stylesheet" href="/static/css/webPan.css" />
     
-    <!-- 外链图标 -->
+    <!-- 外链图标 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    -->
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -54,7 +58,7 @@ head='''
 head=head % version;
 
 foot='<div class="wrap footer"> \
-    <p>&copy;2020 webPan.py \
+    <p>&copy;2020-2021 webPan.py \
 %s \
 | <a target=_blank href="https://github.com/DawnEve/webPan.py">Fork Me</a> | RootPath('+rootPath+')</p> </div> \
 <script src="/static/js/main.js"></script> \

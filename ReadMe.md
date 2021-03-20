@@ -3,6 +3,8 @@
 
 todo 加入多用户功能，文件能设置私有、公开(需要使用数据库)、按口令公开
 
+todo 拖拽上传
+
 ![screenShot0.1.6](./static/images/webPan_py.png)
 
 
