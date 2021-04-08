@@ -220,10 +220,33 @@ def getfiles():
                 # 图片的后缀
                 arr=re.split('\.', file)
                 suffix=arr[len(arr)-1].lower()
-                if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'svg', 'pdf', "PDF", 'html', 'mp3', 'mp4']:
+                if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'svg', 'pdf', "PDF", 'html', 'mp3', 'mp4', 'txt']:
                      picViewPath="<a target=_blank href='/show/?url=/file/"+fpath+file+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
                 
-                htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['file']+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+'</a> '+urlPath_out+picViewPath+"</td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"
+                # setting icon by suffix
+                if suffix in ['png', 'jpg', 'jpeg', 'bmp', 'gif','svg']:
+                    icon=img['png']
+                elif suffix in ['pdf', 'PDF']:
+                    icon=img['pdf']
+                elif suffix in ['html']:
+                    icon=img['html']
+                elif suffix=='mp3':
+                    icon=img['mp3']
+                elif suffix=='mp4':
+                    icon=img['mp4']
+                elif suffix=='txt':
+                    icon=img['txt']
+                
+                elif suffix in [ "py", "pl", "sh", 'php', 'c', 'cpp', 'ipynb']:
+                    icon=img['code']
+                elif suffix in ["R", "r"]:
+                    icon=img['R']
+                elif suffix in ["rar", "zip"]:
+                    icon=img['rar']
+                else:
+                    icon=img['file']
+                #
+                htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+icon+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+'</a> '+urlPath_out+picViewPath+"</td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"
             elif fType=='dir': #type="dir"
                 htmlD+="<tr class=dir data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>"+Size+"</td>  <td>"+fTime+"</td>  </tr>\n"
     #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]
