@@ -1,8 +1,12 @@
 # 网盘 webPan.py
 目的： 用于局域网内文件短暂共享，可以不用U盘了。
 
+## v0.3.5
+![screenShot0.3.5](./static/images/webPan_py_v0.3.5.png)
 
+## v0.1.6
 ![screenShot0.1.6](./static/images/webPan_py.png)
+
 
 
 

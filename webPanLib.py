@@ -15,7 +15,7 @@ elif env=='win32':
     #rootPath="G://baiduDisk//" #windows
     rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
 
-version="v0.3.5"
+version="v0.3.5-2"
 
 
 head='''
