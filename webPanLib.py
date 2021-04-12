@@ -15,7 +15,7 @@ elif env=='win32':
     #rootPath="G://baiduDisk//" #windows
     rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
 
-version="v0.3.5-2"
+version="v0.3.6"
 
 
 head='''
@@ -45,10 +45,10 @@ head='''
 <div class="wrap">
     <fieldset>
         <legend>Upload File</legend>
-        <form action="/upload" method="post" enctype="multipart/form-data">
+        <form action="/upload" method="post" enctype="multipart/form-data" id="oBtnForm">
             <input type="file" name="file" />
             <input type="hidden" name="uploadDir" value="." />
-            <input type="submit" value="上传" /> 
+            <input type="submit" id="submit" value="上传(Upload)" /> 
             <span style='margin-left:30px;'>注意: 本网盘只是临时中转，请及时备份！超过一周的文件可能随时会被<b style='color:red;'>删除</b>！</span>
         </form>
     </fieldset>

@@ -38,6 +38,7 @@ Python 3.6.8 (default, Aug 20 2019, 17:12:48)
 	例如，网盘显示为 audio/xx.mp3的文件，可以外网访问 init('http://y.biomooc.com:8000/file/audio/xx.mp3')
 - 支持在线预览pdf/jpg/png/svg/mp3/mp4/html/txt
 - 不同文件类型对应不同的icon图标
+- 上传文件需要输入验证码，main.js中设定
 
 
 
