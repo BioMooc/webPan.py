@@ -42,8 +42,9 @@ v0.3.4 更换linux下的文件夹位置; 字符字体文件本地化css+fonts
 	增加好几个 大文件: 字体文件
 v0.3.5 更新readme, 丰富文件 icon
 v0.3.5-2 更新readme add screenshot
-v0.3.6 添加基本的上传验证码 main.js
+v0.3.6 添加基本的上传验证码 js/main.js
 v0.3.6-2 fix passwd in js
+v0.3.6-3 fix readme
 # commited here.
 # # -----------------> git push origin master: dawneve
 
