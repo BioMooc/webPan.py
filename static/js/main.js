@@ -219,7 +219,7 @@ window.onload=function(){
 	//单击提交表单时，验证身份
 	oBtnForm.onsubmit=function(ev){
 		var pass=prompt("请输入上传验证码:", "提示: 大实验室房间号，3个数字") //取消则返回null
-		if( pass != null && sha1(pass)=='40bd001563085fc35165329ea1ff5c5ecbdbbeef'){
+		if( pass != null && sha1(pass)=='19187dc98dce52fa4c4e8e05b341a9b77a51fd26'){
 			return true;
 		}else{
 			alert("密码错误!")
