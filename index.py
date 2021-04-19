@@ -261,6 +261,7 @@ def upload():
     uploadDir = request.form.get('uploadDir','./') #获取上传的路径
     #return uploadDir;
     
+    ip = request.remote_addr
     
     if fname:
         url=url_for('getfiles',fpath=uploadDir );
@@ -275,6 +276,14 @@ def upload():
         if os.path.exists(new_fname): #如果存在，则加时间戳前缀
             new_fname = os.path.join(rootPath, uploadDir, t +'_'+ fname.filename);
         fname.save(new_fname)  #保存文件到指定路径
+        
+        #logger
+        if not os.path.exists('dustbin'):
+            os.mkdir('dustbin')
+        with open("dustbin/upload.logger.txt", 'a', encoding='utf-8') as f:
+            timsString=time.strftime("%Y/%m/%d-%H:%M:%S", time.localtime()) 
+            f.write('\t'.join([timsString, ip, fname.filename, new_fname])+"\n" )
+        
         #return url;
         return '<meta http-equiv="refresh" content="3;url='+url+'">'+"Upload Success!. Returning to list in 3 seconds.<br>";
     else:
