@@ -46,6 +46,8 @@ v0.3.6 添加基本的上传验证码 js/main.js
 v0.3.6-2 fix passwd in js
 v0.3.6-3 fix readme
 v0.3.7 add upload logger
+	路由器作为访问转发，只能获得路由器的ip，不能获得用户的ip，怎么办？//todo
+v0.3.8 支持拖拽上传文件
 # commited here.
 # # -----------------> git push origin master: dawneve
 
@@ -65,5 +67,6 @@ todo:
 
 done:
 1.指定目录当根目录。[done v0.0.2]
-2.上传文件[done v0.0.5]
+2.上传文件[done v0.0.5]， 上传文件需要输入密码[v0.3.6-2], sha1加密方式，js层检查。
 3.删除文件，使用js二次确认。[done v0.1.5]
+4.支持拖拽上传[v0.3.8]

@@ -53,3 +53,13 @@ fieldset{border: 1px solid #E7E8EA;  background:#fff;}
 .footer a:hover{color:#DD4814;}
 
 #root{color:red;}
+
+
+.fileBox{
+	border: 1px dashed #eee;
+	padding: 10px 2px;
+    color: #ccc;
+	background:white;
+    text-align: center;
+}
+.fileBoxEnter{border-color:red!important; background:#FFFFE7;}

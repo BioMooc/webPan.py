@@ -15,7 +15,7 @@ elif env=='win32':
     #rootPath="G://baiduDisk//" #windows
     rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
 
-version="v0.3.7"
+version="v0.3.8"
 
 
 head='''
@@ -34,6 +34,7 @@ head='''
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     -->
     <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    
 </head>
 
 <body>
@@ -46,7 +47,7 @@ head='''
     <fieldset>
         <legend>Upload File</legend>
         <form action="/upload" method="post" enctype="multipart/form-data" id="oBtnForm">
-            <input type="file" name="file" />
+            <input type="file" name="file" id="file" draggable="true" class="fileBox" />
             <input type="hidden" name="uploadDir" value="." />
             <input type="submit" id="submit" value="上传(Upload)" /> 
             <span style='margin-left:30px;'>注意: 本网盘只是临时中转，请及时备份！超过一周的文件可能随时会被<b style='color:red;'>删除</b>！</span>
@@ -61,9 +62,11 @@ foot='<div class="wrap footer"> \
     <p>&copy;2020-2021 webPan.py \
 %s \
 | <a target=_blank href="https://github.com/DawnEve/webPan.py">Fork Me</a> | RootPath('+rootPath+')</p> </div> \
-<script src="/static/js/main.js"></script> \
-</body> </html>'
-foot=foot % version;
+</body> \
+    <script src="/static/js/main.js"></script> \
+    <script src="/static/js/drag_upload.js"></script> \
+</html>'
+foot=foot % (version);
 
 
 img={
