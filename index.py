@@ -6,6 +6,7 @@ import shutil
 from flask import send_file
 #interface_path = os.path.dirname(__file__)
 #sys.path.insert(0, interface_path)  #将当前文件的父目录加入临时系统变量
+import re
 
 server = flask.Flask(__name__)
 
@@ -205,6 +206,14 @@ def getfiles():
             arr=filelist2d[i]
             #['tmp.R', '2019-10-25 13:28:17', 1571981297.2041583, 'file', '17.36kb', './tmp.R'],
             file=arr[0];
+            
+            #fix: 在url中的文件名不能含有+号，要替换几个关键字符
+            fileInURL=re.sub("\%", "%25", file);
+            fileInURL=re.sub("\+", "%2B", fileInURL); 
+            fileInURL=re.sub("\&", "%26", fileInURL);
+            fileInURL=re.sub("\#", "%23", fileInURL);
+            fileInURL=re.sub("\=", "%3D", fileInURL);
+            
             fTime=arr[1];
             fTimeNum=arr[2];
             fType=arr[3]
@@ -213,7 +222,7 @@ def getfiles():
             #
             if fType=='file': #type="file"
                 # 外链地址
-                urlPath_out="<a href='/file/"+fpath+file+"'><i class='fa fa-external-link' style='margin-left:10px;' title='外链 - 请右击复制'></i></a>";
+                urlPath_out="<a href='/file/"+fpath+fileInURL+"'><i class='fa fa-external-link' style='margin-left:10px;' title='外链 - 请右击复制'></i></a>";
                 
                 # 预览地址
                 picViewPath=""
@@ -221,7 +230,7 @@ def getfiles():
                 arr=re.split('\.', file)
                 suffix=arr[len(arr)-1].lower()
                 if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'svg', 'pdf', "PDF", 'html', 'mp3', 'mp4', 'txt']:
-                     picViewPath="<a target=_blank href='/show/?url=/file/"+fpath+file+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
+                     picViewPath="<a target=_blank href='/show/?url=/file/"+fpath+fileInURL+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
                 
                 # setting icon by suffix
                 if suffix in ['png', 'jpg', 'jpeg', 'bmp', 'gif','svg']:
@@ -246,7 +255,7 @@ def getfiles():
                 else:
                     icon=img['file']
                 #
-                htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+icon+" <a title='点击下载' target='_blank' href='/download?filename="+file+"&path="+fpath+"'>"+file+'</a> '+urlPath_out+picViewPath+"</td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"
+                htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+icon+" <a title='点击下载' target='_blank' href='/download?filename="+fileInURL+"&path="+fpath+"'>"+file+'</a> '+urlPath_out+picViewPath+"</td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"
             elif fType=='dir': #type="dir"
                 htmlD+="<tr class=dir data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>"+Size+"</td>  <td>"+fTime+"</td>  </tr>\n"
     #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]
@@ -267,9 +276,9 @@ def upload():
         url=url_for('getfiles',fpath=uploadDir );
         
         # fix: 禁止文件名包含&，否则会导致下载失败
-        if re.search('&', fname.filename) != None:
-            #return '{"msg": "文件名不能包含特殊符号 & (请去掉该符号后重新上传)"}'
-            return '<meta http-equiv="refresh" content="3;url='+url+'">'+"<span style='color:red;'>Failed!</span> <br><b style='font-size:30px;'>delete & in your filename and upload again.</b> <br>Returning to list in 5 seconds.<br>";
+        #if re.search('&', fname.filename) != None:
+        #    #return '{"msg": "文件名不能包含特殊符号 & (请去掉该符号后重新上传)"}'
+        #    return '<meta http-equiv="refresh" content="3;url='+url+'">'+"<span style='color:red;'>Failed!</span> <br><b style='font-size:30px;'>delete & in your filename and upload again.</b> <br>Returning to list in 5 seconds.<br>";
         
         t = time.strftime('%Y%m%d%H%M%S')
         new_fname = os.path.join(rootPath, uploadDir, fname.filename);
