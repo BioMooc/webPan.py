@@ -49,6 +49,7 @@ v0.3.7 add upload logger
 	路由器作为访问转发，只能获得路由器的ip，不能获得用户的ip，怎么办？//todo
 v0.3.8 支持拖拽上传文件
 v0.3.9 fix:文件名带+号的文章能上传，但下载报错
+v0.4.0 添加office 3个icon识别6个后缀(doc/docx/ppt/pptx/xls/xlsx)
 # commited here.
 # # -----------------> git push origin master: dawneve
 

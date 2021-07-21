@@ -252,6 +252,14 @@ def getfiles():
                     icon=img['R']
                 elif suffix in ["rar", "zip"]:
                     icon=img['rar']
+                
+                elif suffix in ["doc", "docx"]:
+                    icon=img["doc"]
+                elif suffix in ["ppt", "pptx"]:
+                    icon=img["ppt"]
+                elif suffix in ["xls", "xlsx"]:
+                    icon=img["xls"]
+                
                 else:
                     icon=img['file']
                 #

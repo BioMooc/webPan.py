@@ -15,7 +15,7 @@ elif env=='win32':
     #rootPath="G://baiduDisk//" #windows
     rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
 
-version="v0.3.9"
+version="v0.4.0"
 
 
 head='''
@@ -88,6 +88,10 @@ img={
     "rar": '<img src="/static/images/icon_rar.png" border="0" width="16" height="16">',
     
     "txt": '<img src="/static/images/icon_txt.png" border="0" width="16" height="16">',
+    
+    "doc": '<img src="/static/images/icon_docx.png" border="0" width="16" height="16">',
+    "ppt": '<img src="/static/images/icon_pptx.png" border="0" width="16" height="16">',
+    "xls": '<img src="/static/images/icon_xlsx.png" border="0" width="16" height="16">',
 
     
     "dir": '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABn0lEQVR42u2XvUsCYRzHH5WgN3r5K5qDotGhpamtrSFobGxrEWqwUI9DQwOJIFoSWsrTpEFEMgQjwigSkSQxTau78336dScYij5Kl7+jwS98hufgnu+H51l+DyGD9CEGA9G6jWS6Gy4X0aGUcwyZ4xgt+PanuuJhdBJE39dyr5nMy+XxWwf0ylPEWZfgTGShz+UH9YJsPgfpbKYrDzdWkP/xWMhs24YARNPrHhsoKW8QvTYDZ9GAlyUzLeXyx1732IyS8gb3gR3pJAj7I3C1SyZ9tgn4bZSUy7ymYtIpEL5F4FIS4AVB0YZ/EnBbiF1agBqEL9baBXy2cVArskRHgVohBKX8MTp0ATEIpfdDdCgCY1Dj/VB6c6BDFah+XkExxaJDF/jwQDG5hw5dIHcOhcQ2Op0FrKNQzZxBIbaFDlWgkj4F8XETHbpA6gTE6AY6FIERqCSPQLxbR4cqUH5xghBZRYcukLCDEF5Bhy4QtwIfWkaHLhBjgA8uoUMRGIbyswn4wCI6nQXYIfjy61WhaTjhpZnQqPpEJHcN3pH/Lt8WJRscHbhvPQAAAABJRU5ErkJggg==">',
