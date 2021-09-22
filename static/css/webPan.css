@@ -14,6 +14,7 @@ tablr tr{padding:15px;}
 table tr:hover{background:#eee;}
 table tr img{border:0; width:16px; height:16px;}
 table tr td {padding:0 10px; 
+	max-width: 600px;
     color:#aaa;
     text-overflow: ellipsis;
 }
@@ -46,7 +47,11 @@ h4.root span{ border-right:1px solid #d6dadc; padding:0 5px;}
 h4.root span a{background:#FFd8d9; color:red; padding:0px 3px; border-radius:5px;}
 h4.root span a:hover{background:#f00;color:white;}
 
-.wrap{padding:10px 20px; width:80%; min-width:600px; margin:0 auto;}
+.wrap{padding:10px 20px; width:80%; 
+	min-width:600px; 
+	max-width:1000px;
+	margin:0 auto;
+}
 fieldset{border: 1px solid #E7E8EA;  background:#fff;}
 
 .footer, .footer a{color:#ccc;}
