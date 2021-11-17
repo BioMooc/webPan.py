@@ -52,6 +52,7 @@ v0.3.9 fix:文件名带+号的文章能上传，但下载报错
 v0.4.0 添加office 3个icon识别6个后缀(doc/docx/ppt/pptx/xls/xlsx)
 v0.4.1 扩大后缀(gz->zip, csv->xls, avi->mp3)
 v0.4.2 增加css max-width
+v0.4.3 为了兼容高版本 Flask(v1.02->2.02), 去掉 send_file() 第一个参数名
 # commited here.
 # # -----------------> git push origin master: dawneve
 

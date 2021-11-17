@@ -54,6 +54,7 @@ def show_photo():
 # 支持跨域访问
 # version: 0.2
 # version: 0.3 支持pdf预览
+# version: 0.4 为了兼容高版本 flask, 去掉 send_file() 第一个参数名
 ##############
 #路径名字不能是/static/,因为它是内部定义过的静态文件路径
 @server.route('/file/<path:filePath>', methods=['get'])
@@ -77,7 +78,7 @@ def audio(filePath):
             #res.headers['Access-Control-Allow-Origin'] = '*'
             #return res;
             
-            response = make_response(send_file(filename_or_fp= fpathT, as_attachment=False))
+            response = make_response(send_file( fpathT, as_attachment=False))
             response.headers["Access-Control-Allow-Origin"]="*"
             return response
         else:
