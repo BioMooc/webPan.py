@@ -247,8 +247,10 @@ def getfiles():
                 elif suffix=='txt':
                     icon=img['txt']
                 
-                elif suffix in [ "py", "pl", "sh", 'php', 'c', 'cpp', 'ipynb']:
+                elif suffix in [ "py", "pl", "sh", 'php', 'c', 'cpp']:
                     icon=img['code']
+                elif suffix in [ 'ipynb']:
+                    icon=img['note']
                 elif suffix in ["R", "r"]:
                     icon=img['R']
                 elif suffix in ["rar", "zip", "gz"]:
