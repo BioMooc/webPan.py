@@ -238,7 +238,7 @@ def getfiles():
                     icon=img['png']
                 elif suffix in ['pdf', 'PDF']:
                     icon=img['pdf']
-                elif suffix in ['html']:
+                elif suffix in ['html', "htm"]:
                     icon=img['html']
                 elif suffix in ['mp3', "wav"]:
                     icon=img['mp3']
@@ -262,7 +262,14 @@ def getfiles():
                     icon=img["ppt"]
                 elif suffix in ["xls", "xlsx", "csv"]:
                     icon=img["xls"]
-                
+
+                elif suffix in ["conf", "css", "yaml", "yml"]:
+                    icon=img["conf"]
+                elif suffix in ["js"]:
+                    icon=img["js"]
+                elif suffix in ["bat"]:
+                    icon=img["bat"]
+
                 else:
                     icon=img['file']
                 #

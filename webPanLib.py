@@ -15,7 +15,7 @@ elif env=='win32':
     #rootPath="G://baiduDisk//" #windows
     rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
 
-version="v0.4.4"
+version="v0.4.5"
 
 
 head='''
@@ -89,6 +89,9 @@ img={
     "rar": '<img src="/static/images/icon_rar.png" border="0" width="16" height="16">',
     
     "txt": '<img src="/static/images/icon_txt.png" border="0" width="16" height="16">',
+    "js": '<img src="/static/images/icon_js.png" border="0" width="16" height="16">', #js
+    "bat": '<img src="/static/images/icon_bat.png" border="0" width="16" height="16">', # bat
+    "conf": '<img src="/static/images/icon_conf.png" border="0" width="16" height="16">', #css, yaml, yml, conf
     
     "doc": '<img src="/static/images/icon_docx.png" border="0" width="16" height="16">',
     "ppt": '<img src="/static/images/icon_pptx.png" border="0" width="16" height="16">',

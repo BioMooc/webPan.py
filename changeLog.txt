@@ -54,6 +54,7 @@ v0.4.1 扩大后缀(gz->zip, csv->xls, avi->mp3)
 v0.4.2 增加css max-width
 v0.4.3 为了兼容高版本 Flask(v1.02->2.02), 去掉 send_file() 第一个参数名
 v0.4.4 jupyter 图标
+v0.4.5 图标: css,js,bat
 # commited here.
 # # -----------------> git push origin master: dawneve
 
