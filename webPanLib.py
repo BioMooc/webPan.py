@@ -74,7 +74,7 @@ head='''
 head=head % version;
 
 foot='<div class="wrap footer"> \
-    <p>&copy;2020-2021 webPan.py \
+    <p>&copy;2020-2022 webPan.py \
 %s \
 | <a target=_blank href="https://github.com/DawnEve/webPan.py">Fork Me</a> | RootPath('+rootPath+')</p> \
 chrome://flags/#block -Secure private network requests | Disabled, Relaunch\
