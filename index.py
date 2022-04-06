@@ -225,13 +225,10 @@ def getfiles():
                 # 外链地址
                 urlPath_out="<a href='/file/"+fpath+fileInURL+"'><i class='fa fa-external-link' style='margin-left:10px;' title='外链 - 请右击复制'></i></a>";
                 
-                # 预览地址
-                picViewPath=""
-                # 图片的后缀
+                # 文件的后缀名
                 arr=re.split('\.', file)
                 suffix=arr[len(arr)-1].lower()
-                if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'svg', 'pdf', "PDF", 'html', 'mp3', 'mp4', 'txt']:
-                     picViewPath="<a target=_blank href='/show/?url=/file/"+fpath+fileInURL+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
+                
                 
                 # setting icon by suffix
                 if suffix in ['png', 'jpg', 'jpeg', 'bmp', 'gif','svg']:
@@ -241,7 +238,7 @@ def getfiles():
                 elif suffix in ['html', "htm"]:
                     icon=img['html']
                 elif suffix in ['mp3', "wav"]:
-                    icon=img['mp3']
+                    icon=img['audio']
                 elif suffix=='mp4':
                     icon=img['mp4']
                 elif suffix=='txt':
@@ -273,7 +270,20 @@ def getfiles():
                 else:
                     icon=img['file']
                 #
-                htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+icon+" <a title='点击下载' target='_blank' href='/download?filename="+fileInURL+"&path="+fpath+"'>"+file+'</a> '+urlPath_out+picViewPath+"</td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"
+                
+                # 预览图标与地址
+                picViewPath=""
+                if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'svg', 'pdf', "PDF", 'html', 'mp3', 'mp4', 'txt']:
+                     picViewPath="<a target=_blank href='/show/?url=/file/"+fpath+fileInURL+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
+                # 播放音频图标
+                audioPlayPath=""
+                if suffix in ['mp3', 'wav']:
+                     audioPlayPath="<a target=_blank href='"+playerPath+ \
+                     request.host_url + \
+                     "file/"+strip(fpath, "^\./")+fileInURL+"'><i class='fa fa-play-circle-o' style='margin-left:10px;' title='播放 - 单击新标签页播放'></i></a>";
+                
+                #
+                htmlF+="<tr class=file data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+icon+" <a title='点击下载' target='_blank' href='/download?filename="+fileInURL+"&path="+fpath+"'>"+file+'</a> '+urlPath_out+picViewPath+ audioPlayPath+ "</td>  <td>"+Size+"</td>   <td>"+fTime+"</td>  </tr>\n"
             elif fType=='dir': #type="dir"
                 htmlD+="<tr class=dir data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>"+Size+"</td>  <td>"+fTime+"</td>  </tr>\n"
     #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]
@@ -331,8 +341,7 @@ if __name__ == '__main__':
     env=sys.platform #"win32"测试环境;  "linux"生产环境
     print('env=',env)
     if env=='linux':
-        server.run(host="192.168.2.120",port=8000) #ubuntu
+        server.run(host="0.0.0.0",port=8000) #ubuntu
     elif env=='win32':
-        server.run(host="127.0.0.1",port=8005) #windows
-        
-        
+        server.run(host="0.0.0.0",port=8005) #windows
+#
