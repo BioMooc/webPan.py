@@ -19,7 +19,7 @@ elif env=='win32':
     #rootPath="G://baiduDisk//" #windows
     rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
 
-version="v0.4.6"
+version="v0.4.7"
 
 
 # 音频播放器地址
@@ -124,24 +124,30 @@ img={
 };
 
 
-# 字节bytes转化kb\m\g
+# 字节bytes转化 B\K\M\G\T
 #v0.2 保留2位
+#v0.3 和 linux 一致
 def formatSize(bytes):
     try:
         bytes = float(bytes)
-        kb = bytes / 1024
+        K = bytes / 1024
     except:
         print("传入的字节格式不对")
         return "Error"
-    if kb >= 1024:
-        M = kb / 1024
+    if K >= 1024:
+        M = K / 1024
         if M >= 1024:
             G = M / 1024
+            if G>=1024:
+                T = G / 1024
+                return "%.2fT" % (T)  
             return "%.2fG" % (G)
         else:
             return "%.2fM" % (M)
     else:
-        return "%.2fkb" % (kb)
+        if K<1:
+            return "%.0fB" % (bytes)
+        return "%.2fK" % (K)
 
 
 # 获取文件大小

@@ -138,22 +138,47 @@ aBtnOrder=Array.prototype.slice.call(aBtnOrder)
 //sort array, by time
 function sortByTime(arr, desc=null){
 	desc = desc || order.time;
-	console.log("sortByTime>>:", desc);
+	//console.log("sortByTime>>:", desc);
 	arr.sort(function(a,b){
 		return -( b.getAttribute("data-time") - a.getAttribute("data-time") )*desc;
 	});
 }
-
-
 //sort array, by filename
 function sortByFilename(arr, desc=null){
 	desc = desc || order.file;
-	console.log("sortBy filename>>:", desc);
-
+	//console.log("sortBy filename>>:", desc);
 	arr.sort(function(a, b){
 		return - (b.getElementsByTagName('a')[0].innerHTML).localeCompare( a.getElementsByTagName('a')[0].innerHTML )*desc;
 	});
 }
+
+// filesize to M unit;
+function getFilesize2M(str1){
+	var val=parseFloat( str1.substr(0, str1.length-1) ); 
+	var unit=str1.substr(str1.length-1)
+	//B\K\M\G\T
+	switch(unit) {
+		 case "B":
+			//""; break;
+			return val/1024/1024
+		 case "K": return val/1024;
+		 case "M": return val;
+		 case "G": return val*1024;
+		 case "T": return val*1024*1024;
+		 default: return val;
+	}
+}
+//sort array, by size, depend on getFilesize2M()
+function sortBySize(arr, desc=null){
+	desc = desc || order.size;
+	//console.log("sortBy file size>>:", desc);
+	arr.sort(function(a, b){
+		var a1=getFilesize2M(a.getElementsByTagName("td")[2].innerHTML);
+		var b1=getFilesize2M(b.getElementsByTagName("td")[2].innerHTML);
+		return - (b1 - a1)*desc;
+	});
+}
+
 
 
 
@@ -209,6 +234,18 @@ window.onload=function(){
 	}
 
 
+
+	//排序，按文件大小
+	oBtnOrder_size=aBtnOrder[1]
+	oBtnOrder_size.onclick=function(){
+		//1.排序
+		sortBySize(aTrD, order.file);
+		sortBySize(aTrF, order.file);
+		order.file = -1*order.file;//翻转顺序
+
+		//2. 刷新表格
+		refresh_table(aTrH, aTrF, aTrD, oTable)
+	}
 
 
 	
