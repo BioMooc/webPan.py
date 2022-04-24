@@ -180,7 +180,8 @@ def getfiles():
     htmlF="";
     htmlD="";
     table1="<div class=wrap><fieldset> <legend>File List</legend> "+titlePath+"\
-<table><tr class=header> <th></th> <th>FileName</th>   <th>Size</th>   <th>"+img['order']+"Modified</th> </tr>\n"
+<table><tr class=header> <th></th> "+\
+"<th>"+img['order']+"FileName</th>   <th>"+img['order']+"Size</th>   <th>"+img['order']+"Modified</th> </tr>\n"
     if os.path.isdir(fpathT):
         filelist = os.listdir(fpathT)
         #为文件增加时间2列，类型列，大小,url

@@ -60,6 +60,7 @@ v0.4.6 新增外部播放音频链接，可在webPanLib.py中自定义播放器�
 		static/css/font-awesome.min.css
 		<i class="fa fa-play-circle-o" style="margin-left:10px;" title="单击播放"></i>
 v0.4.6-2 修改底部年份为 2022
+v0.4.6-3 支持按照 文件名排序
 # commited here.
 # # -----------------> git push origin master: dawneve
 

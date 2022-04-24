@@ -119,7 +119,7 @@ img={
     
     'back': '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAv0lEQVR42mNgGAVEApH5EfWi8yP+gzCIPSCWu1/t+W9xtpG+jkC23OfWxP82l1r/qxwupI8j0C2HOUDteAntHYHNcmQH0NQRuCxHdwBNHIHPcmwOoKojCFmOywFUcQQxluNzAMWOIMZyQg5AdgRZDiBkOTEOAGGyHYAN62zPx+kAmfUp/3Hpo1qWRA8ZZAdQ1aJRB4w6YNQBQ9IB+AoiqhVQ+BxAKh51ANkOwNYopZsDxOZHNJCa0KiaCEfBsAcAEh85/7c92uEAAAAASUVORK5CYII=">',
     
-    'order':'<img title="order" id=order src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAHCAYAAADebrddAAAAiklEQVR42mPIrewMya3oup5X2XkeiC/nVXRezgViEDu3vPMskH0BROeVdqkyJNTXcwAlDgDxfwxcAaWrOpsYYCC/qlUcKPgMLlnZBcWd/4E272BAB0DdjkDJf2AFFRBTgfTj4uIeEQZsAKigHmE6EJd32DDgA0DF20FOyK/sqmIgBEDWAhVPwyYHAJAqZIiNwsHKAAAAAElFTkSuQmCC" style="width:11px;height:9px;">'
+    'order':'<img title="order" class=order src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAHCAYAAADebrddAAAAiklEQVR42mPIrewMya3oup5X2XkeiC/nVXRezgViEDu3vPMskH0BROeVdqkyJNTXcwAlDgDxfwxcAaWrOpsYYCC/qlUcKPgMLlnZBcWd/4E272BAB0DdjkDJf2AFFRBTgfTj4uIeEQZsAKigHmE6EJd32DDgA0DF20FOyK/sqmIgBEDWAhVPwyYHAJAqZIiNwsHKAAAAAElFTkSuQmCC" style="width:11px;height:9px;">'
     
 };
 

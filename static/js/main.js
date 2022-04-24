@@ -119,9 +119,13 @@ var oTable=document.getElementsByTagName("table")[0];
 var aTrH=oTable.getElementsByClassName("header");//需要保留
 var aTrD=oTable.getElementsByClassName("dir");//dir
 var aTrF=oTable.getElementsByClassName("file");//file
-var order=-1; //order: desc or asc
+var order={
+	file:1,
+	size:1,
+	time:-1
+}; //order: desc or asc
 
-var oBtnOrder=document.getElementById("order");
+var aBtnOrder=document.getElementsByClassName("order");
 var oBtnDelete=document.getElementById("delete");
 
 var oBtnSubmit=document.getElementById("submit");
@@ -129,15 +133,47 @@ var oBtnSubmit=document.getElementById("submit");
 //to real array;
 aTrF=Array.prototype.slice.call(aTrF)
 aTrD=Array.prototype.slice.call(aTrD)
+aBtnOrder=Array.prototype.slice.call(aBtnOrder)
 
-//sort array
-function sortByTime(arr, order=1){
-	//console.log("sortByTime");
+//sort array, by time
+function sortByTime(arr, desc=null){
+	desc = desc || order.time;
+	console.log("sortByTime>>:", desc);
 	arr.sort(function(a,b){
-		return -( b.getAttribute("data-time") - a.getAttribute("data-time") )*order;
+		return -( b.getAttribute("data-time") - a.getAttribute("data-time") )*desc;
 	});
 }
 
+
+//sort array, by filename
+function sortByFilename(arr, desc=null){
+	desc = desc || order.file;
+	console.log("sortBy filename>>:", desc);
+
+	arr.sort(function(a, b){
+		return - (b.getElementsByTagName('a')[0].innerHTML).localeCompare( a.getElementsByTagName('a')[0].innerHTML )*desc;
+	});
+}
+
+
+
+
+
+
+// 对 file 和 dir 分别排序后，刷新表格
+function refresh_table(aTrH, aTrF, aTrD, oTable){
+	//2.插入到虚拟数组中
+	var arr=[];
+	Array.prototype.push.apply(arr,aTrH)
+	Array.prototype.push.apply(arr,aTrF)
+	Array.prototype.push.apply(arr,aTrD)
+
+	//3.插入dom
+	oTable.innerHTML="";//清空
+	for(var i=0;i<arr.length;i++){
+		oTable.append(arr[i]);
+	}
+}
 
 //
 window.onload=function(){
@@ -145,27 +181,36 @@ window.onload=function(){
     document.forms[0].getElementsByTagName('input')[1].value=fpath;
     //console.log("ok")
 	
-	//排序键
-	oBtnOrder.onclick=function(){
+	//排序键，默认按时间
+	oBtnOrder_time=aBtnOrder[2]
+	oBtnOrder_time.onclick=function(){
 		//1.排序
-		sortByTime(aTrD, order);
-		sortByTime(aTrF, order);
-		order=-1*order;//翻转顺序
+		sortByTime(aTrD, order.time);
+		sortByTime(aTrF, order.time);
+		order.time = -1*order.time;//翻转顺序
 
-		//2.插入到虚拟数组中
-		var arr=[];
-		Array.prototype.push.apply(arr,aTrH)
-		Array.prototype.push.apply(arr,aTrF)
-		Array.prototype.push.apply(arr,aTrD)
-
-		//3.插入dom
-		oTable.innerHTML="";//清空
-		for(var i=0;i<arr.length;i++){
-			oTable.append(arr[i]);
-		}
+		//2. 刷新表格
+		refresh_table(aTrH, aTrF, aTrD, oTable)
 	}
-	oBtnOrder.onclick(); //载入后就排序，最新的在最上层
-	
+	oBtnOrder_time.onclick(); //载入后就排序，最新的在最上层
+
+
+
+	//排序，按文件名
+	oBtnOrder_filename=aBtnOrder[0]
+	oBtnOrder_filename.onclick=function(){
+		//1.排序
+		sortByFilename(aTrD, order.file);
+		sortByFilename(aTrF, order.file);
+		order.file = -1*order.file;//翻转顺序
+
+		//2. 刷新表格
+		refresh_table(aTrH, aTrF, aTrD, oTable)
+	}
+
+
+
+
 	
 	//删除键
 	oBtnDelete.onclick=function(){
