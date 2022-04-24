@@ -120,9 +120,9 @@ var aTrH=oTable.getElementsByClassName("header");//需要保留
 var aTrD=oTable.getElementsByClassName("dir");//dir
 var aTrF=oTable.getElementsByClassName("file");//file
 var order={
-	file:1,
+	filename:1,
 	size:1,
-	time:-1
+	time:1
 }; //order: desc or asc
 
 var aBtnOrder=document.getElementsByClassName("order");
@@ -140,15 +140,17 @@ function sortByTime(arr, desc=null){
 	desc = desc || order.time;
 	//console.log("sortByTime>>:", desc);
 	arr.sort(function(a,b){
-		return -( b.getAttribute("data-time") - a.getAttribute("data-time") )*desc;
+		return ( b.getAttribute("data-time") - a.getAttribute("data-time") )*desc;
 	});
 }
 //sort array, by filename
 function sortByFilename(arr, desc=null){
-	desc = desc || order.file;
+	desc = desc || order.filename;
 	//console.log("sortBy filename>>:", desc);
 	arr.sort(function(a, b){
-		return - (b.getElementsByTagName('a')[0].innerHTML).localeCompare( a.getElementsByTagName('a')[0].innerHTML )*desc;
+		var a1=a.getElementsByTagName('a')[0].innerHTML;
+		var b1=b.getElementsByTagName('a')[0].innerHTML;
+		return b1.localeCompare( a1 )*desc;
 	});
 }
 
@@ -175,7 +177,7 @@ function sortBySize(arr, desc=null){
 	arr.sort(function(a, b){
 		var a1=getFilesize2M(a.getElementsByTagName("td")[2].innerHTML);
 		var b1=getFilesize2M(b.getElementsByTagName("td")[2].innerHTML);
-		return - (b1 - a1)*desc;
+		return (b1 - a1)*desc;
 	});
 }
 
@@ -198,7 +200,28 @@ function refresh_table(aTrH, aTrF, aTrD, oTable){
 	for(var i=0;i<arr.length;i++){
 		oTable.append(arr[i]);
 	}
+	
+	refresh_icon()
 }
+
+// 刷新三角形，根据排序情况，更新最新的
+function refresh_icon(){
+	var up="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAHCAYAAADebrddAAAAiklEQVR42mNgwALyKrumFRf3iDAQAvmVXVVAxf/zKjq341WYV95hk1fZ+R+MK8C4HqtCkLW5FZ2PQYpyK6AaKjv/5VV1OmIozq3s3AFR0AXFUNMrO5/lV7WKI6yv6mxCksSGDyTU13Mw5JV2qeaWd54FWn0BRAMlLgPZl/NAuBKMz+dWdF0H2hwCAPwcZIjfOFLHAAAAAElFTkSuQmCC";
+	var down="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAHCAYAAADebrddAAAAiklEQVR42mPIrewMya3oup5X2XkeiC/nVXRezgViEDu3vPMskH0BROeVdqkyJNTXcwAlDgDxfwxcAaWrOpsYYCC/qlUcKPgMLlnZBcWd/4E272BAB0DdjkDJf2AFFRBTgfTj4uIeEQZsAKigHmE6EJd32DDgA0DF20FOyK/sqmIgBEDWAhVPwyYHAJAqZIiNwsHKAAAAAElFTkSuQmCC";
+	
+	function getIcon(i){
+		if(1==i) return up;
+		return down;
+	}
+	
+	aBtnOrder[0].src=getIcon(order.filename)
+	aBtnOrder[1].src=getIcon(order.size)
+	aBtnOrder[2].src=getIcon(order.time)
+}
+
+
+
+
 
 //
 window.onload=function(){
@@ -227,7 +250,7 @@ window.onload=function(){
 		//1.排序
 		sortByFilename(aTrD, order.file);
 		sortByFilename(aTrF, order.file);
-		order.file = -1*order.file;//翻转顺序
+		order.filename = -1*order.filename;//翻转顺序
 
 		//2. 刷新表格
 		refresh_table(aTrH, aTrF, aTrD, oTable)
@@ -241,7 +264,7 @@ window.onload=function(){
 		//1.排序
 		sortBySize(aTrD, order.file);
 		sortBySize(aTrF, order.file);
-		order.file = -1*order.file;//翻转顺序
+		order.size = -1*order.size;//翻转顺序
 
 		//2. 刷新表格
 		refresh_table(aTrH, aTrF, aTrD, oTable)
