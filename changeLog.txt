@@ -63,8 +63,14 @@ v0.4.6-2 修改底部年份为 2022
 v0.4.6-3 支持按照 文件名排序
 v0.4.7 支持按照 文件大小 排序
 v0.4.8 fix 排序图标 上下箭头的刷新
+
+#######################
+# BioMooc/webPan.py
+#######################
+v0.4.9 transfer from DawnEve to BioMooc
+	$ git remote add origin git@github.com:BioMooc/webPan.py.git
 # commited here.
-# # -----------------> git push origin master: dawneve
+# # -----------------> git push origin master: BioMooc
 
 
 
