@@ -69,6 +69,7 @@ v0.4.8 fix 排序图标 上下箭头的刷新
 #######################
 v0.4.9 transfer from DawnEve to BioMooc
 	$ git remote add origin git@github.com:BioMooc/webPan.py.git
+v0.4.9-2 update "folk me" links at footer
 # commited here.
 # # -----------------> git push origin master: BioMooc
 

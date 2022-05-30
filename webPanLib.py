@@ -19,7 +19,7 @@ elif env=='win32':
     #rootPath="G://baiduDisk//" #windows
     rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
 
-version="v0.4.8"
+version="v0.4.9"
 
 
 # 音频播放器地址
@@ -76,7 +76,7 @@ head=head % version;
 foot='<div class="wrap footer"> \
     <p>&copy;2020-2022 webPan.py \
 %s \
-| <a target=_blank href="https://github.com/DawnEve/webPan.py">Fork Me</a> | RootPath('+rootPath+')</p> \
+| <a target=_blank href="https://github.com/BioMooc/webPan.py">Fork Me</a> | RootPath('+rootPath+')</p> \
 chrome://flags/#block -Secure private network requests | Disabled, Relaunch\
 </div> \
 </body> \
