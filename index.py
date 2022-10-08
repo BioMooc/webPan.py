@@ -211,7 +211,7 @@ def getfiles():
         for i in range(len(filelist2d)):
             arr=filelist2d[i]
             #['tmp.R', '2019-10-25 13:28:17', 1571981297.2041583, 'file', '17.36kb', './tmp.R'],
-            file=arr[0];
+            file=arr[0]; #文件名，如果过长，尝试截断显示：优先用js实现
             
             #fix: 在url中的文件名不能含有+号，要替换几个关键字符
             fileInURL=re.sub("\%", "%25", file);
@@ -348,14 +348,28 @@ def downloader(filename):
     return send_from_directory("static",filename,as_attachment=False)
 
 
+# 几个在终端打印彩色文字的函数
+def print_yellow(str):
+    print( f"\033[40;33m{str}\033[0m" )
+
+def print_red(str):
+    print( f"\033[40;31m{str}\033[0m" )
 
 # run the app
 if __name__ == '__main__':
     server.debug = True # 设置调试模式，生产模式的时候要关掉debug
     env=sys.platform #"win32"测试环境;  "linux"生产环境
-    print('env=',env)
-    if env=='linux':
-        server.run(host="0.0.0.0",port=8000) #ubuntu
-    elif env=='win32':
-        server.run(host="0.0.0.0",port=8005) #windows
+    port = 8000 if env=="linux" else 8005
+    #     ubuntu                    windows
+    
+    # 显示欢迎屏
+    print_yellow("#"*45);
+    print_red(  "#    Welcome to webPan.py                   #");
+    print_red( f"#       * Version: {version}                   #" )
+    print_red( f"#       * Environment: {env}                #" )
+    print_red( f"#       * Port: {port}                        #" )
+    print_red( f"#    https://github.com/BioMooc/webPan.py   #" )
+    print_yellow("#"*45);
+    
+    server.run(host="0.0.0.0",port=port)
 #
