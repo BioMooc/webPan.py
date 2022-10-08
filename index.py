@@ -274,8 +274,10 @@ def getfiles():
                 
                 # 预览图标与地址
                 picViewPath=""
-                if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'svg', 'pdf', "PDF", 'html', 'mp3', 'mp4', 'txt']:
-                     picViewPath="<a target=_blank href='/show/?url=/file/"+fpath+fileInURL+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
+                if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'svg', 'pdf', "PDF", 'html', 'mp3', 'mp4']:
+                    picViewPath="<a target=_blank href='/show/?url=/file/"+fpath+fileInURL+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
+                elif suffix in ["txt"]:
+                    picViewPath="<a target=_blank href='/file/"+fpath+fileInURL+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
                 # 播放音频图标
                 audioPlayPath=""
                 if suffix in ['mp3', 'wav']:

@@ -19,7 +19,7 @@ elif env=='win32':
     #rootPath="G://baiduDisk//" #windows
     rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
 
-version="v0.4.9"
+version="v0.5.0"
 
 
 # 音频播放器地址
