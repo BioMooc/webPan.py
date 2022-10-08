@@ -134,6 +134,10 @@ def getfiles():
     debug='';
     
     fpath = request.values.get('fpath', './') #获取用户输入的目录
+
+    # 空地址自动回首页
+    if fpath=="":
+        fpath="./"
     if fpath[-1]!="/":
         fpath+="/";
     
@@ -168,7 +172,7 @@ def getfiles():
         else:
             urlPath+=arr[i]+"/";
         #print(i, arr[i], urlPath)
-    titlePath="<h4 class=root><span><a id='delete' class=button href='javascript:void(0);'>Delete</a></span> Index of "+urlPath+"</h4>\n\n"; #cut to pieces.
+    topPath="<h4 class=root><span><a id='delete' class=button href='javascript:void(0);'>Delete</a></span> Index of "+urlPath+"</h4>\n\n"; #cut to pieces.
 
     #返回上一级的url链接和tr
     htmlBack="";
@@ -179,7 +183,7 @@ def getfiles():
     #tr 文件和文件夹
     htmlF="";
     htmlD="";
-    table1="<div class=wrap><fieldset> <legend>File List</legend> "+titlePath+"\
+    table1="<div class=wrap><fieldset> <legend>File List</legend> "+topPath+"\
 <table><tr class=header> <th></th> "+\
 "<th>"+img['order']+"FileName</th>   <th>"+img['order']+"Size</th>   <th>"+img['order']+"Modified</th> </tr>\n"
     if os.path.isdir(fpathT):
@@ -291,6 +295,13 @@ def getfiles():
                 htmlD+="<tr class=dir data-time='"+str(fTimeNum)+"'> <td><input type='checkbox' tabindex='-1'></td> <td>"+img['dir']+" <a title='点击打开' href='/list?fpath="+url+"/'>"+file+"/</a></td> <td>"+Size+"</td>  <td>"+fTime+"</td>  </tr>\n"
     #files = [file for file in filelist if os.path.isfile(os.path.join(fpath, file))]
     return head+debug+table1+htmlBack+htmlF+htmlD+"</table> </fieldset></div>"+foot;
+
+
+
+
+
+
+
 
 
 # post方法：上传文件的 https://www.cnblogs.com/wl443587/p/10552542.html

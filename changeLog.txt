@@ -72,8 +72,10 @@ v0.4.9 transfer from DawnEve to BioMooc
 v0.4.9-2 update "folk me" links at footer
 v0.5.0 update txt view
 	专门为txt写了一行预览跳转
+v0.5.1 fix: fpath 为空自动回首页
 # commited here.
 # # -----------------> git push origin master: BioMooc
+
 
 
 
