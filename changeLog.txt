@@ -74,6 +74,7 @@ v0.5.0 update txt view
 	专门为txt写了一行预览跳转
 v0.5.1 fix: fpath 为空自动回首页
 v0.5.2 add 命令行欢迎屏
+v0.5.3 fix: 如果文件名/文件夹名过长，则只显示前 55 个字符，js控制
 # commited here.
 # # -----------------> git push origin master: BioMooc
 

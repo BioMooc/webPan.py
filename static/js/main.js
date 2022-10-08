@@ -13,6 +13,7 @@ function encodeUTF8(s) {
     };
   return r;
 }
+
 // 字符串加密成 hex 字符串
 function sha1(s) {
   var data = new Uint8Array(encodeUTF8(s))
@@ -135,6 +136,30 @@ aTrF=Array.prototype.slice.call(aTrF)
 aTrD=Array.prototype.slice.call(aTrD)
 aBtnOrder=Array.prototype.slice.call(aBtnOrder)
 
+
+// set Max length for file Or dir names
+var maxFileNameLength=55
+for(var i in aTrF){
+	var oA=aTrF[i].childNodes[3].childNodes[2]
+	if( oA.childNodes[0].length > maxFileNameLength ){
+		console.log("too long", oA.innerText)
+		oA.title=oA.innerText
+		oA.innerText = oA.innerText.substring(0, maxFileNameLength)+"..."
+		aTrF[i].childNodes[3].childNodes[2]=oA
+	}
+}
+for(var i in aTrD){
+	var oA=aTrD[i].childNodes[3].childNodes[2]
+	if( oA.childNodes[0].length > maxFileNameLength ){
+		console.log("too long", oA.innerText)
+		oA.title=oA.innerText
+		oA.innerText = oA.innerText.substring(0, maxFileNameLength)+"..."
+		aTrD[i].childNodes[3].childNodes[2]=oA
+	}
+}
+
+
+
 //sort array, by time
 function sortByTime(arr, desc=null){
 	desc = desc || order.time;
@@ -191,9 +216,9 @@ function sortBySize(arr, desc=null){
 function refresh_table(aTrH, aTrF, aTrD, oTable){
 	//2.插入到虚拟数组中
 	var arr=[];
-	Array.prototype.push.apply(arr,aTrH)
-	Array.prototype.push.apply(arr,aTrF)
-	Array.prototype.push.apply(arr,aTrD)
+	Array.prototype.push.apply(arr,aTrH) //header 
+	Array.prototype.push.apply(arr,aTrF) //File names
+	Array.prototype.push.apply(arr,aTrD) //Dir names
 
 	//3.插入dom
 	oTable.innerHTML="";//清空
