@@ -19,7 +19,7 @@ elif env=='win32':
     #rootPath="G://baiduDisk//" #windows
     rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
 
-version="v0.5.3"
+version="v0.5.4"
 
 
 # 音频播放器地址
@@ -103,6 +103,8 @@ img={
     "note": '<img src="/static/images/notebook.ico" border="0" width="16" height="16">',
     "code": '<img src="/static/images/icon_code.png" border="0" width="16" height="16">',
     "R": '<img src="/static/images/icon_R.png" border="0" width="16" height="16">',
+    "py": '<img src="/static/images/icon_py.png" border="0" width="16" height="16">',
+    "php": '<img src="/static/images/icon_php.png" border="0" width="16" height="16">',
     "rar": '<img src="/static/images/icon_rar.png" border="0" width="16" height="16">',
     
     "txt": '<img src="/static/images/icon_txt.png" border="0" width="16" height="16">',

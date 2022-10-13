@@ -75,6 +75,7 @@ v0.5.0 update txt view
 v0.5.1 fix: fpath 为空自动回首页
 v0.5.2 add 命令行欢迎屏
 v0.5.3 fix: 如果文件名/文件夹名过长，则只显示前 55 个字符，js控制
+v0.5.4 add py ico; too hard for php ico;
 # commited here.
 # # -----------------> git push origin master: BioMooc
 
@@ -90,6 +91,7 @@ todo:
 
 4.多用户
 5.回收站5天后删除。
+6.为md和R、py添加在线预览功能
 
 
 
