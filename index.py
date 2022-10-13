@@ -143,7 +143,7 @@ def getfiles():
     
     #debug+=fpath;
     
-    #保护目录，保证只能传入相对路径
+    #保护目录: 保证只能传入相对路径
     if not fpath.startswith("."):
         if fpath.startswith("/"):
             fpath='.'+fpath;
@@ -255,8 +255,8 @@ def getfiles():
                     icon=img['py']
                 elif suffix in ["R", "r"]:
                     icon=img['R']
-                #elif suffix in [ 'php']:
-                #    icon=img['php']
+                elif suffix in [ 'php']:
+                    icon=img['php']
                 elif suffix in ["php", "pl", "sh", 'c', 'cpp']:
                     icon=img['code']
 
@@ -353,28 +353,51 @@ def downloader(filename):
     return send_from_directory("static",filename,as_attachment=False)
 
 
-# 几个在终端打印彩色文字的函数
+
+
+# 几个在linux终端打印彩色文字的函数
 def print_yellow(str):
     print( f"\033[40;33m{str}\033[0m" )
-
 def print_red(str):
     print( f"\033[40;31m{str}\033[0m" )
+
+# for win cmd
+# https://www.delftstack.com/howto/python/python-print-colored-text/
+# https://github.com/tartley/colorama
+def print2(color, str):
+    if env=="linux":
+        if color=="red":
+            print_red(str)
+        else:
+            print_yellow(str)
+    elif env=="win32":
+        import colorama
+        from colorama import Fore
+        from colorama import Style
+        colorama.init()
+        if color=="red":
+            print(Fore.RED + Style.BRIGHT + str + Style.RESET_ALL)
+        else:
+            print(Fore.YELLOW + Style.BRIGHT + str + Style.RESET_ALL)
+    else:
+        print(str);
+
 
 # run the app
 if __name__ == '__main__':
     server.debug = True # 设置调试模式，生产模式的时候要关掉debug
-    env=sys.platform #"win32"测试环境;  "linux"生产环境
+    # env defined in webPanLib.lib
     port = 8000 if env=="linux" else 8005
     #     ubuntu                    windows
     
     # 显示欢迎屏
-    print_yellow("#"*45);
-    print_red(  "#    Welcome to webPan.py                   #");
-    print_red( f"#       * Version: {version}                   #" )
-    print_red( f"#       * Environment: {env}                #" )
-    print_red( f"#       * Port: {port}                        #" )
-    print_red( f"#    https://github.com/BioMooc/webPan.py   #" )
-    print_yellow("#"*45);
+    print2("yellow", "#"*45);
+    print2("yellow", "#    Welcome to webPan.py                   #");
+    print2("yellow", f"#       * Version: {version}                   #" )
+    print2("yellow", f"#       * Environment: {env}                #" )
+    print2("red", f"#       * URL: http://127.0.0.1:{port}        #" )
+    print2("yellow", f"#    https://github.com/BioMooc/webPan.py   #" )
+    print2("yellow", "#"*45);
     
     server.run(host="0.0.0.0",port=port)
 #
