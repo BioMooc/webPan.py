@@ -54,7 +54,7 @@ Python 3.6.8 (default, Aug 20 2019, 17:12:48)
 
 
 # 运行方式 How to run
-1. 下载项目 $ git clone https://github.com/DawnEve/webPan.py.git
+1. 下载项目 $ git clone https://github.com/BioMooc/webPan.py.git
 2. 设置 
  - 安装python3的包 $ pip install flask
  - 如果提示缺少其他包，继续安装缺少的包，比如 $ pip install pkgName

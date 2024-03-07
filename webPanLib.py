@@ -15,11 +15,11 @@ if env=='linux':
     rootPath="/home/wangjl/data/web/docs/" #ubuntu
 elif env=='win32':
     #rootPath="F://Temp/" #windows
-    #rootPath="G://baiduDisk//" #windows
-    rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
+    rootPath="D://SUSTech//" #windows
+    #rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
 
-version="v0.5.6"
-
+version="v0.5.7"
+year=time.strftime("%Y", time.localtime())
 
 # 音频播放器地址
 playerPath="http://ielts.biomooc.com/listening/player.html?url="
@@ -73,8 +73,7 @@ head='''
 head=head % version;
 
 foot='<div class="wrap footer"> \
-    <p>&copy;2020-2023 webPan.py \
-%s \
+    <p>&copy;2020-%s webPan.py %s \
 | <a target=_blank href="https://github.com/BioMooc/webPan.py">Fork Me</a> | RootPath('+rootPath+')</p> \
 <br>chrome://flags/#block -Secure private network requests | Disabled, Relaunch \
 <br>edge://flags/#block-insecure-private-network-requests | Disabled, Relaunch \
@@ -83,7 +82,7 @@ foot='<div class="wrap footer"> \
     <script src="/static/js/main.js"></script> \
     <script src="/static/js/drag_upload.js"></script> \
 </html>'
-foot=foot % (version);
+foot=foot % (year, version);
 
 
 img={

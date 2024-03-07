@@ -78,6 +78,7 @@ v0.5.3 fix: 如果文件名/文件夹名过长，则只显示前 55 个字符，
 v0.5.4 add py ico; too hard for php ico;
 v0.5.5 add php ico: not good; fix color in win cmd
 v0.5.6 add edge insecure hint;
+v0.5.7 add code_reader; auto update year; [2024/3/7]
 # commited here.
 # # -----------------> git push origin master: BioMooc
 

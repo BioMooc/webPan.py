@@ -50,6 +50,14 @@ def show_photo():
 #
 
 
+# 预览代码
+@server.route('/code_reader/', methods=['GET'])
+def code_reader():
+    url = request.values.get('url', '')
+    return render_template("code_reader.html", file=url)
+#
+
+
 ##############
 # 支持跨域访问
 # version: 0.2
@@ -280,13 +288,17 @@ def getfiles():
                 else:
                     icon=img['file']
                 #
-                
+
                 # 预览图标与地址
                 picViewPath=""
                 if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'svg', 'pdf', "PDF", 'html', 'mp3', 'mp4']:
                     picViewPath="<a target=_blank href='/show/?url=/file/"+fpath+fileInURL+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
                 elif suffix in ["txt"]:
                     picViewPath="<a target=_blank href='/file/"+fpath+fileInURL+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
+                # 预览代码 code
+                if suffix in ['py', 'r', "R", "c", "cpp", "js", "pl"]:
+                    picViewPath="<a target=_blank href='/code_reader/?file=/file/"+fpath+fileInURL+"'><i class='fa fa-code' style='margin-left:10px;' title='预览代码 - 单击预览'></i></a>";
+
                 # 播放音频图标
                 audioPlayPath=""
                 if suffix in ['mp3', 'wav']:
