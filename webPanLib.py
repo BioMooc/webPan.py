@@ -194,30 +194,31 @@ def strip(str1, reg):
 # check if dir1 lies in dir2?
 import os
 import sys
-def is_folder_contained(dir1, dir2):
-    dir1 = os.path.abspath(dir1) #inside dir
-    dir2 = os.path.abspath(dir2) #outside dir
+def is_folder_contained(inner_dir, outer_dir, debug=False):
+    dir1 = os.path.abspath(inner_dir) # long, and detailed
+    dir2 = os.path.abspath(outer_dir) # short
 
     # 检查dir2是否存在
     if not os.path.exists(dir2):
         return False
 
-    # 获取dir2的绝对路径，并且将其分割成一个列表
-    dir2_parts = dir2.split(os.path.sep)
+    # 获取dir1的绝对路径，并且将其分割成一个列表
+    dir1_parts = dir1.split(os.path.sep)
 
     # 从dir1开始遍历，逐级向上比较
-    for i in range(len(dir2_parts), 0, -1):
-        candidate = os.path.join(*dir2_parts[:i])
+    for i in range(len(dir1_parts), 0, -1):
+        candidate = os.path.join(*dir1_parts[:i])
         if "linux"==sys.platform:
             candidate=os.path.join("/", candidate)
         
-        #print(dir1, "candidate=", candidate)
+        if debug:
+            print(i, dir2, "candidate=", candidate)
         if os.path.exists(candidate) and os.path.isdir(candidate):
-            return os.path.samefile(dir1, candidate)
+            if os.path.samefile(dir2, candidate):
+                return True
 
     return False
-# 使用示例
-#dir1 = '/path/to/parent'
-#dir2 = '/path/to/parent/child'
-#print(is_folder_contained(dir1, dir2))  # 输出: True
-#is_folder_contained("/home/wangjl/data/web/docs/code/zhangzm", "/home/wangjl/data/web/docs/code/zhangzm")
+#
+#is_folder_contained("/home/wangjl/data/web/docs/code/zhangzm/", "/home/wangjl/data/web/docs/code/") #T
+#is_folder_contained("/home/wangjl/data/web/docs/code/zhangzm", "/home/wangjl/data/web/docs/code/zhangzm", False) #T
+#is_folder_contained("/home/wangjl/data/web/docs/code/", "/home/wangjl/data/web/docs/code/zhangzm") #F
