@@ -84,6 +84,7 @@ v0.5.9 preview jupyter notebook [2024/5/17]
 	add MIT LICENSE.txt
 	预览 ipynb file: templates/nbpreview/ 整合改写了一个MIT证书的github开源插件
 	支持预览后缀名 sh, Rmd, ini/config/gitignore/csv/, 
+v0.6.0 update version number [2024/5/17]
 # commited here.
 # # -----------------> git push origin master: BioMooc
 
