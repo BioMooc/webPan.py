@@ -306,7 +306,7 @@ window.onload=function(){
 				var url=aCheck[i].parentElement.nextElementSibling.childNodes[2].href;//.replace("/download?","/delete?");
 				if(url.search(/fpath/)==-1){
 					var fnames=url.match(/filename=(.*?)\&/)[1];
-					arr.push(fnames);			
+					arr.push( decodeURI(fnames) );
 					//console.log(url)
 				}
 			}
@@ -317,11 +317,11 @@ window.onload=function(){
 			alert(error);
 			return false;
 		}
-		filenames=arr.join(",");
+		filenames=arr.join(",\n");
 		// 获取参数，path， filenames
 		
 		//删除前二次确认
-		if(!confirm('确定要删除这些文件吗？('+filenames+')\n此操作可能不可恢复！')) {
+		if(!confirm('确定要删除这些文件吗？\n\n'+filenames+'\n\n此操作可能不可恢复！')) {
 			return false;
 		}
 		

@@ -29,7 +29,7 @@ Python 3.6.8 (default, Aug 20 2019, 17:12:48)
 
 
 # 现有功能
-- 在webPanLib.py中定义根目录
+- 在webPanLib.py中定义根目录 [v0.6.1]
 - 浏览和下载文件
 - 上传文件
 - 删除一个或多个文件到回收站/dustbin/，在 dustbin/ 删除则彻底删除;
@@ -42,7 +42,8 @@ Python 3.6.8 (default, Aug 20 2019, 17:12:48)
 - 支持拖拽上传文件
 - 新增外部播放音频链接，可在webPanLib.py中自定义播放器地址
 - 预览代码 [v0.5.7]
-- 预览 jupyter notebook [v0.5.9]
+- 预览 jupyter notebook: ipynb [v0.5.9]
+- 设置文件 config.ini; 支持设置多个禁止删除文件夹 system::nochange [v0.6.1]
 
 
 # todo
