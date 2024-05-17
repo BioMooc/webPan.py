@@ -86,6 +86,7 @@ v0.5.9 preview jupyter notebook [2024/5/17]
 	支持预览后缀名 sh, Rmd, ini/config/gitignore/csv/, 
 v0.6.0 update version number [2024/5/17]
 v0.6.1 add config.ini,能设置禁删文件夹 [2024/5/17]
+v0.6.2 fix bug: no change dir [2024/5/17]
 # commited here.
 # # -----------------> git push origin master: BioMooc
 
