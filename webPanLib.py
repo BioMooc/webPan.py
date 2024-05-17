@@ -15,7 +15,8 @@ if env=='linux':
     rootPath="/home/wangjl/data/web/docs/" #ubuntu
 elif env=='win32':
     #rootPath="F://Temp/" #windows
-    rootPath="D://SUSTech//" #windows
+    #rootPath="D://SUSTech//" #windows
+    rootPath="E://cheatsheet" #windows
     #rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
 
 version="v0.5.7"
