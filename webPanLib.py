@@ -8,22 +8,26 @@ import os,time, re
 #########################
 # settings
 #########################
+import configparser
+def getConf(section, item, file_path="config.ini"):
+	cf = configparser.ConfigParser()
+	cf.read(file_path)
+	return cf.get(section, item)
+
+
 import sys
 env=sys.platform #"win32"测试环境;  "linux"生产环境
-#print('env=',env)
 if env=='linux':
-    rootPath="/home/wangjl/data/web/docs/" #ubuntu
+    rootPath = getConf("rootpath", "linux")
 elif env=='win32':
-    #rootPath="F://Temp/" #windows
-    #rootPath="D://SUSTech//" #windows
-    rootPath="E://cheatsheet" #windows
-    #rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
+    rootPath = getConf("rootpath", "windows")
 
-version="v0.6.0"
+version=getConf("system", "version")
 year=time.strftime("%Y", time.localtime())
 
 # 音频播放器地址
-playerPath="http://ielts.biomooc.com/listening/player.html?url="
+playerPath=getConf("system", "player")
+
 
 
 
@@ -184,3 +188,31 @@ def getModifiedTime(full_path):
 # 按正则表达式，去掉某个部分
 def strip(str1, reg):
     return re.sub(reg, "", str1)
+
+
+
+# check if dir1 lies in dir2?
+import os
+def is_folder_contained(dir1, dir2):
+    dir1 = os.path.abspath(dir1) #inside dir
+    dir2 = os.path.abspath(dir2) #outside dir
+
+    # 检查dir2是否存在
+    if not os.path.exists(dir2):
+        return False
+
+    # 获取dir2的绝对路径，并且将其分割成一个列表
+    dir2_parts = dir2.split(os.path.sep)
+
+    # 从dir1开始遍历，逐级向上比较
+    for i in range(len(dir2_parts), 0, -1):
+        candidate = os.path.join(*dir2_parts[:i])
+        if os.path.exists(candidate) and os.path.isdir(candidate):
+            return os.path.samefile(dir1, candidate)
+
+    return False
+
+# 使用示例
+#dir1 = '/path/to/parent'
+#dir2 = '/path/to/parent/child'
+#print(is_folder_contained(dir1, dir2))  # 输出: True

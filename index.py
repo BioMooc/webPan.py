@@ -108,25 +108,36 @@ def audio(filePath):
 
 # 删除文件 ajax方式
 # 删除到dustbin文件夹
+# v0.3 在配置文件夹中设置不能删除的文件夹
 @server.route('/delete', methods=['POST'])
 def delete():
     fpath = request.form.get('path', '') #获取文件路径
     fnameStr = request.form.get('filenames', '')  #获取文件名
     #return '{"del_msg0":"参数"}path=%s, filename=%s;' %(fpath, fname);
     
+    # A1. 从ini中读取不能删除的文件夹
+    nochange_dirs = getConf("system", "nochange").split(",")
+    print("2. nochange_dirs:", nochange_dirs, len(nochange_dirs) )
+
     fnameArr=re.split('\,', fnameStr) #分为数组
     rs=""
     for fname in fnameArr:
-        #print(fname)
+        print("1. fname:", fname)
         fpathT = os.path.abspath( os.path.join(rootPath, fpath) ) #真实路径
         if os.path.isfile(os.path.join(fpathT,fname)): # and os.path.isdir(fpath):
             curFile=os.path.join(fpathT, fname);
+            
+            # A2. 是否在 禁止删除的文件夹中
+            for nochange_dir in nochange_dirs:
+                outer=os.path.abspath( os.path.join(rootPath, nochange_dir) )
+                if is_folder_contained(fpathT, outer):
+                    return jsonify({"msg": "该文件夹下不能删除，见 config.ini [system]nochange", "path": fpath, 'filename': fpath});
+            
             #如果不存在垃圾箱，则新建垃圾箱
             dustbin=os.path.abspath( os.path.join(rootPath, "dustbin") );
             if not os.path.exists(dustbin):
                 os.mkdir(dustbin)
             #如果不在垃圾箱，则移动到垃圾箱
-            
             #rs+="; dustbin="+dustbin +"; fpath="+fpathT+'; ';
             if(dustbin!=fpathT):
                 shutil.move(curFile, os.path.join(dustbin,fname) );
@@ -361,7 +372,7 @@ def upload():
         if not os.path.exists('dustbin'):
             os.mkdir('dustbin')
         with open("dustbin/upload.logger.txt", 'a', encoding='utf-8') as f:
-            timsString=time.strftime("%Y/%m/%d-%H:%M:%S", time.localtime()) 
+            timsString=time.strftime("%Y/%m/%d-%H:%M:%S", time.localtime())
             f.write('\t'.join([timsString, ip, fname.filename, new_fname])+"\n" )
         
         #return url;
@@ -415,8 +426,7 @@ def print2(color, str):
 if __name__ == '__main__':
     server.debug = True # 设置调试模式，生产模式的时候要关掉debug
     # env defined in webPanLib.lib
-    port = 8000 if env=="linux" else 8005
-    #     ubuntu                    windows
+    port = getConf("port", "linux") if env=="linux" else getConf("port", "windows")
     
     # 显示欢迎屏
     print2("yellow", "#"*45);
