@@ -19,7 +19,7 @@ elif env=='win32':
     rootPath="E://cheatsheet" #windows
     #rootPath="G://xampp//htdocs//DawnScholar//audio" #windows
 
-version="v0.5.7"
+version="v0.6.0"
 year=time.strftime("%Y", time.localtime())
 
 # 音频播放器地址
