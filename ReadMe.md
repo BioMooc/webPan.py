@@ -42,7 +42,7 @@ Python 3.6.8 (default, Aug 20 2019, 17:12:48)
 - 支持拖拽上传文件
 - 新增外部播放音频链接，可在webPanLib.py中自定义播放器地址
 - 预览代码 [v0.5.7]
-
+- 预览 jupyter notebook [v0.5.9]
 
 
 # todo

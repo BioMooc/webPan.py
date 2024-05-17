@@ -58,6 +58,14 @@ def code_reader():
 #
 
 
+# 预览 jupyter notebook
+@server.route('/nbpreview/', methods=['GET'])
+def nbpreview():
+    return render_template("nbpreview/index.html")
+#
+
+
+
 ##############
 # 支持跨域访问
 # version: 0.2
@@ -261,7 +269,7 @@ def getfiles():
                     icon=img['note']
                 elif suffix in [ 'py']:
                     icon=img['py']
-                elif suffix in ["R", "r"]:
+                elif suffix in ["r", "rmd"]:
                     icon=img['R']
                 elif suffix in [ 'php']:
                     icon=img['php']
@@ -289,17 +297,21 @@ def getfiles():
                     icon=img['file']
                 #
 
-                # 预览图标与地址
+                # 预览图标与地址, suffix in lower case
                 picViewPath=""
-                if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'svg', 'pdf', "PDF", 'html', 'mp3', 'mp4']:
+                if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'svg', 'pdf', 'html', 'mp3', 'mp4']:
                     picViewPath="<a target=_blank href='/show/?url=/file/"+fpath+fileInURL+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
-                elif suffix in ["txt"]:
+                # 预览文本: plain text
+                elif suffix in ["txt", "csv", "ini", "config", "gitignore"]:
                     picViewPath="<a target=_blank href='/file/"+fpath+fileInURL+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
                 # 预览代码 code
-                if suffix in ['py', 'r', "R", "c", "cpp", "js", "pl"]:
+                if suffix in ['py', 'r', "c", "cpp", "c++", "h", "sh", "js", "pl", "rmd", "php"]:
                     picViewPath="<a target=_blank href='/code_reader/?file=/file/"+fpath+fileInURL+"'><i class='fa fa-code' style='margin-left:10px;' title='预览代码 - 单击预览'></i></a>";
+                # 预览 jupyter notebook
+                if suffix in ["ipynb"]:
+                    picViewPath="<a target=_blank href='/nbpreview/?filename=/file/"+fpath+fileInURL+"'><i class='fa fa-code' style='margin-left:10px;' title='预览代码 - 单击预览'></i></a>";
 
-                # 播放音频图标
+                # 播放音频图标 music
                 audioPlayPath=""
                 if suffix in ['mp3', 'wav']:
                      audioPlayPath="<a target=_blank href='"+playerPath+ \
@@ -364,6 +376,10 @@ def upload():
 def downloader(filename):
     return send_from_directory("static",filename,as_attachment=False)
 
+# 添加新静态文件的路径，这样就允许 nb/下的css/js资源加载了
+@server.route("/nbpreview/<path:filename>")
+def nbpreview_src(filename):
+    return send_from_directory("templates/nbpreview/",filename,as_attachment=False)
 
 
 
