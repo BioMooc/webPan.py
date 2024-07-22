@@ -132,6 +132,10 @@ def delete():
                 outer=os.path.abspath( os.path.join(rootPath, nochange_dir) )
                 if is_folder_contained(fpathT, outer):
                     return jsonify({"msg": "该文件夹下不能删除，见 config.ini [system]nochange", "path": fpath, 'filename': fpath});
+                # A3 如果是文件，则不允许删除
+                if curFile==outer:
+                    print("warning: can NOT delete '", curFile, "' as it sits in config.ini::nochange!")
+                    return jsonify({"msg": "该文件不能删除，见 config.ini [system]nochange", "path": fpath, 'filename': nochange_dir});
             
             #如果不存在垃圾箱，则新建垃圾箱
             dustbin=os.path.abspath( os.path.join(rootPath, "dustbin") );
@@ -273,7 +277,7 @@ def getfiles():
                     icon=img['audio']
                 elif suffix=='mp4':
                     icon=img['mp4']
-                elif suffix=='txt':
+                elif suffix in ['txt', 'md']:
                     icon=img['txt']
                 
                 elif suffix in [ 'ipynb']:
@@ -313,10 +317,10 @@ def getfiles():
                 if suffix in ['png', 'jpg','jpeg','bmp', 'gif', 'svg', 'pdf', 'html', 'mp3', 'mp4']:
                     picViewPath="<a target=_blank href='/show/?url=/file/"+fpath+fileInURL+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
                 # 预览文本: plain text
-                elif suffix in ["txt", "csv", "ini", "config", "gitignore"]:
+                elif suffix in ["txt", "css"]:
                     picViewPath="<a target=_blank href='/file/"+fpath+fileInURL+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
                 # 预览代码 code
-                if suffix in ['py', 'r', "c", "cpp", "c++", "h", "sh", "js", "pl", "rmd", "php"]:
+                if suffix in ['py', 'r', "c", "cpp", "c++", "h", "sh", "js", "pl", "rmd", "php", "md", "gitignore", "ini", "config", "csv"]:
                     picViewPath="<a target=_blank href='/code_reader/?file=/file/"+fpath+fileInURL+"'><i class='fa fa-code' style='margin-left:10px;' title='预览代码 - 单击预览'></i></a>";
                 # 预览 jupyter notebook
                 if suffix in ["ipynb"]:
