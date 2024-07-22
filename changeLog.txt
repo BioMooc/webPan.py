@@ -89,6 +89,7 @@ v0.6.1 add config.ini,能设置禁删文件夹 [2024/5/17]
 v0.6.2 fix bug: no change dir [2024/5/17]
 v0.6.3 fix bug: no change dir on Ubuntu [2024/5/17]
 v0.6.4 version [2024/5/17]
+v0.6.5 set can NOT delete list [2024/7/22]
 # commited here.
 # # -----------------> git push origin master: BioMooc
 
