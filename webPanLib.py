@@ -169,7 +169,15 @@ def getDocSize(path):
 # 获取文件夹大小，递归法，返回的是bytes，需要在最终返回值做k/m/g换算
 # by: Lin Yanling v0.1 2019.9.4
 # v0.2 改为os.path.join
-def dirSize(path):
+# v0.3 忽略 .git 文件夹
+def dirSize(path, ignoreGit=True):
+
+    if ignoreGit==True:
+        # 检查路径是否是 .git 目录
+        if os.path.isdir(path) and os.path.basename(path) == '.git':
+            print("dirSize Ignore .git: ", path)
+            return 0
+
     content = os.listdir(path)
     size = 0
     for v in content:
