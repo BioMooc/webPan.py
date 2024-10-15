@@ -92,6 +92,11 @@ v0.6.4 version [2024/5/17]
 v0.6.5 set can NOT delete list [2024/7/22]
 v0.6.6@sust Code Reader: add line number[2024/8/5]
 v0.6.7@sust fix bug on Linux [2024/8/5]
+v0.6.8@sust 预览 歌词.lrc, .bat 代码模式 [2024/10/15]
+	删除 /templates/nbpreview/data/w.step1.Figure3.CD4_global_diffmap.ipynb
+	gitignore 中忽略 *.ipynb
+	update templates/code_reader.html: 适应文件名中的 中文破折号
+	py 脚本首行添加 # -*- coding: utf-8 -*-
 # commited here.
 # # -----------------> git push origin master: BioMooc
 
@@ -108,7 +113,7 @@ todo:
 4.多用户
 5.回收站5天后删除。
 6.为md和R、py添加在线预览功能
-
+7.怎么从.git中彻底删掉无用示例文件 /templates/nbpreview/data/w.step1.Figure3.CD4_global_diffmap.ipynb
 
 
 done:
@@ -116,3 +121,4 @@ done:
 2.上传文件[done v0.0.5]， 上传文件需要输入密码[v0.3.6-2], sha1加密方式，js层检查。
 3.删除文件，使用js二次确认。[done v0.1.5]
 4.支持拖拽上传[v0.3.8]
+5.支持预览 歌词.lrc, .bat，代码模式 [v0.6.8]

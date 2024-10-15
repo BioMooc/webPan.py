@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #coding=utf-8
 # lib for the app 
 # const, function, class

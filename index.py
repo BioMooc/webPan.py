@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #coding=utf-8
 import flask, os,sys,time,re, urllib.parse
 from webPanLib import *
@@ -250,6 +251,9 @@ def getfiles():
             fileInURL=re.sub("\&", "%26", fileInURL);
             fileInURL=re.sub("\#", "%23", fileInURL);
             fileInURL=re.sub("\=", "%3D", fileInURL);
+
+            #fileInURL=re.sub("－", "%E2%80%90", fileInURL);
+            fileInURL=re.sub(" ", "%20", fileInURL);
             
             fTime=arr[1];
             fTimeNum=arr[2];
@@ -277,7 +281,7 @@ def getfiles():
                     icon=img['audio']
                 elif suffix=='mp4':
                     icon=img['mp4']
-                elif suffix in ['txt', 'md']:
+                elif suffix in ['txt', 'md', 'lrc']:
                     icon=img['txt']
                 
                 elif suffix in [ 'ipynb']:
@@ -320,7 +324,8 @@ def getfiles():
                 elif suffix in ["txt", "css"]:
                     picViewPath="<a target=_blank href='/file/"+fpath+fileInURL+"'><i class='fa fa-picture-o' style='margin-left:10px;' title='预览 - 单击预览'></i></a>";
                 # 预览代码 code
-                if suffix in ['py', 'r', "c", "cpp", "c++", "h", "sh", "js", "pl", "rmd", "php", "md", "gitignore", "ini", "config", "csv"]:
+                if suffix in ['py', 'r', "c", "cpp", "c++", "h", "sh", "js", "pl", "rmd", "php", "md", "gitignore", "ini", "config", "csv", \
+                              "lrc", "bat"]:
                     picViewPath="<a target=_blank href='/code_reader/?file=/file/"+fpath+fileInURL+"'><i class='fa fa-code' style='margin-left:10px;' title='预览代码 - 单击预览'></i></a>";
                 # 预览 jupyter notebook
                 if suffix in ["ipynb"]:
