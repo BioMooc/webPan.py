@@ -356,6 +356,13 @@ def getfiles():
 # post方法：上传文件的 https://www.cnblogs.com/wl443587/p/10552542.html
 @server.route('/upload', methods=['POST'])
 def upload():
+    # 如果不允许上传文件，则直接返回错误提示
+    allow_file_upload = getConf("system", "allow_file_upload", isBool=True)
+    if not allow_file_upload:
+        return '{"msg": "<b style=\'color:red;\'>Error: uploading file is not allowed now!</b>\
+            Please ask the administrator for help: config.ini<br> \
+            Click <b>back arrow</b> on your web brower to go back."}'
+
     fname = request.files.get('file')  #获取上传的文件
     uploadDir = request.form['uploadDir'] #获取上传的路径
     uploadDir = request.form.get('uploadDir','./') #获取上传的路径
@@ -436,12 +443,14 @@ if __name__ == '__main__':
     server.debug = True # 设置调试模式，生产模式的时候要关掉debug
     # env defined in webPanLib.lib
     port = getConf("port", "linux") if env=="linux" else getConf("port", "windows")
-    
+    allow_file_upload = getConf("system", "allow_file_upload", isBool=True)
+
     # 显示欢迎屏
     print2("yellow", "#"*45);
     print2("yellow", "#    Welcome to webPan.py                   #");
     print2("yellow", f"#       * Version: {version}                   #" )
     print2("yellow", f"#       * Environment: {env}                #" )
+    print2("yellow", f"#       * allow_file_upload: {allow_file_upload}           #" )
     print2("red", f"#       * URL: http://127.0.0.1:{port}        #" )
     print2("yellow", f"#    https://github.com/BioMooc/webPan.py   #" )
     print2("yellow", "#"*45);

@@ -98,6 +98,7 @@ v0.6.8@picb 预览 歌词.lrc, .bat 代码模式 [2024/10/15]
 	update templates/code_reader.html: 适应文件名中的 中文破折号
 	py 脚本首行添加 # -*- coding: utf-8 -*-
 v0.6.9@picb dirSize() 统计文件夹大小默认忽略 .git 文件夹 [2024/10/15]
+v0.7.0@picb config.ini, 可设置禁止上传 [2024/10/15]
 # commited here.
 # # -----------------> git push origin master: BioMooc
 

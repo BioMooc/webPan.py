@@ -10,9 +10,11 @@ import os,time, re
 # settings
 #########################
 import configparser
-def getConf(section, item, file_path="config.ini"):
+def getConf(section, item, file_path="config.ini", isBool=False):
 	cf = configparser.ConfigParser()
 	cf.read(file_path)
+	if isBool:
+		return cf.getboolean(section, item)
 	return cf.get(section, item)
 
 
