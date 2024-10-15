@@ -2,5 +2,6 @@ backup
 dustbin
 
 __pycache__
+*.ipynb
 
 _Console_FillOutputAttribute
