@@ -99,7 +99,7 @@ def audio(filePath):
             response.headers["Access-Control-Allow-Origin"]="*"
             return response
         else:
-            return '{"msg2":"参数不正确"}path=%s, filename=%s;' %(fpathT, fname);
+            return '{"msg2":"参数不正确"}path=%s, filename=%s;' %(fpathT, filePath);
     else:
         return '{"msg1":"请输入参数"}'
 #ajax test OK: http://127.0.0.1:8005/file/tmp.R
@@ -444,6 +444,7 @@ if __name__ == '__main__':
     # env defined in webPanLib.lib
     port = getConf("port", "linux") if env=="linux" else getConf("port", "windows")
     allow_file_upload = getConf("system", "allow_file_upload", isBool=True)
+    rootpath = getConf("rootpath", env)
 
     # 显示欢迎屏
     print2("yellow", "#"*45);
@@ -451,6 +452,7 @@ if __name__ == '__main__':
     print2("yellow", f"#       * Version: {version}                   #" )
     print2("yellow", f"#       * Environment: {env}                #" )
     print2("yellow", f"#       * allow_file_upload: {allow_file_upload}           #" )
+    print2("yellow", f"#       * rootpath: {rootpath}" )
     print2("red", f"#       * URL: http://127.0.0.1:{port}        #" )
     print2("yellow", f"#    https://github.com/BioMooc/webPan.py   #" )
     print2("yellow", "#"*45);
