@@ -101,6 +101,7 @@ v0.6.9@picb dirSize() 统计文件夹大小默认忽略 .git 文件夹 [2024/10/
 v0.7.0@picb config.ini, 可设置禁止上传 [2024/10/15]
 v0.7.1@picb update ReadMe.md [2024/10/16]
 	启动页显示根目录 路径
+v0.7.2@picb fix bug on windows [2024/10/27]
 # commited here.
 # # -----------------> git push origin master: BioMooc
 
