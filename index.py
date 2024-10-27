@@ -441,10 +441,9 @@ def print2(color, str):
 # run the app
 if __name__ == '__main__':
     server.debug = True # 设置调试模式，生产模式的时候要关掉debug
-    # env defined in webPanLib.lib
+    # env, rootPath defined in webPanLib.lib
     port = getConf("port", "linux") if env=="linux" else getConf("port", "windows")
     allow_file_upload = getConf("system", "allow_file_upload", isBool=True)
-    rootpath = getConf("rootpath", env)
 
     # 显示欢迎屏
     print2("yellow", "#"*45);
@@ -452,7 +451,7 @@ if __name__ == '__main__':
     print2("yellow", f"#       * Version: {version}                   #" )
     print2("yellow", f"#       * Environment: {env}                #" )
     print2("yellow", f"#       * allow_file_upload: {allow_file_upload}           #" )
-    print2("yellow", f"#       * rootpath: {rootpath}" )
+    print2("yellow", f"#       * rootPath: {rootPath}" )
     print2("red", f"#       * URL: http://127.0.0.1:{port}        #" )
     print2("yellow", f"#    https://github.com/BioMooc/webPan.py   #" )
     print2("yellow", "#"*45);
