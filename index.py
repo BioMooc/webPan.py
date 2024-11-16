@@ -408,6 +408,12 @@ def downloader(filename):
 def nbpreview_src(filename):
     return send_from_directory("templates/nbpreview/",filename,as_attachment=False)
 
+# /favicon.ico
+@server.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(server.root_path, 'static/images/'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
 
 
 # 几个在linux终端打印彩色文字的函数

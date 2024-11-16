@@ -102,6 +102,7 @@ v0.7.0@picb config.ini, 可设置禁止上传 [2024/10/15]
 v0.7.1@picb update ReadMe.md [2024/10/16]
 	启动页显示根目录 路径
 v0.7.2@picb fix bug on windows [2024/10/27]
+v0.7.3@picb update set global /favicon.ico [2024/11/16]
 # commited here.
 # # -----------------> git push origin master: BioMooc
 
