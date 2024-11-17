@@ -102,6 +102,9 @@ v0.7.0@picb config.ini, 可设置禁止上传 [2024/10/15]
 v0.7.1@picb update ReadMe.md [2024/10/16]
 	启动页显示根目录 路径
 v0.7.2@picb fix bug on windows [2024/10/27]
+v0.7.3@picb update set global /favicon.ico [2024/11/16]
+v0.7.4@picb config.ini: 风格统一为单词小写加下划线 [2024/11/17]
+	不能删除的文件和文件夹显示到网页底部
 # commited here.
 # # -----------------> git push origin master: BioMooc
 
@@ -117,7 +120,7 @@ todo:
 
 4.多用户
 5.回收站5天后删除。
-6.为md和R、py添加在线预览功能
+6.为md添加在线预览功能
 7.怎么从.git中彻底删掉无用示例文件 /templates/nbpreview/data/w.step1.Figure3.CD4_global_diffmap.ipynb
 
 

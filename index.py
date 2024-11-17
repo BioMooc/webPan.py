@@ -25,7 +25,7 @@ def index():
 def download():
     fpath = request.values.get('path', '') #获取文件路径
     fname = request.values.get('filename', '')  #获取文件名
-    fpathT = os.path.join(rootPath, fpath) #真实路径
+    fpathT = os.path.join(root_path, fpath) #真实路径
     if fname.strip() and fpath.strip():
         #print(fname, fpath);
         if os.path.isfile(os.path.join(fpathT,fname)): # and os.path.isdir(fpath):
@@ -78,7 +78,7 @@ def nbpreview():
 def audio(filePath):
     #fpath = request.values.get('path', '') #获取文件路径
     #fname = request.values.get('filename', '')  #获取文件名
-    fpathT = os.path.join(rootPath, filePath) #真实路径
+    fpathT = os.path.join(root_path, filePath) #真实路径
     print(fpathT)
     if filePath.strip():
         if os.path.isfile(fpathT):
@@ -116,30 +116,28 @@ def delete():
     fnameStr = request.form.get('filenames', '')  #获取文件名
     #return '{"del_msg0":"参数"}path=%s, filename=%s;' %(fpath, fname);
     
-    # A1. 从ini中读取不能删除的文件夹
-    nochange_dirs = getConf("system", "nochange").split(",")
-    print("2. nochange_dirs:", nochange_dirs, len(nochange_dirs) )
+    print("2. can_not_delete_on_web_dirs:", can_not_delete_on_web_dirs, len(can_not_delete_on_web_dirs) )
 
     fnameArr=re.split('\,', fnameStr) #分为数组
     rs=""
     for fname in fnameArr:
         print("1. fname:", fname)
-        fpathT = os.path.abspath( os.path.join(rootPath, fpath) ) #真实路径
+        fpathT = os.path.abspath( os.path.join(root_path, fpath) ) #真实路径
         if os.path.isfile(os.path.join(fpathT,fname)): # and os.path.isdir(fpath):
             curFile=os.path.join(fpathT, fname);
             
             # A2. 是否在 禁止删除的文件夹中
-            for nochange_dir in nochange_dirs:
-                outer=os.path.abspath( os.path.join(rootPath, nochange_dir) )
-                if is_folder_contained(fpathT, outer):
-                    return jsonify({"msg": "该文件夹下不能删除，见 config.ini [system]nochange", "path": fpath, 'filename': fpath});
+            for can_not_delete_on_web_dir in can_not_delete_on_web_dirs:
+                outer_dir=os.path.abspath( os.path.join(root_path, can_not_delete_on_web_dir) )
+                if is_folder_contained(fpathT, outer_dir):
+                    return jsonify({"msg": "该文件夹下不能删除，见 config.ini [system]can_not_delete_on_web", "path": fpath, 'filename': fpath});
                 # A3 如果是文件，则不允许删除
-                if curFile==outer:
-                    print("warning: can NOT delete '", curFile, "' as it sits in config.ini::nochange!")
-                    return jsonify({"msg": "该文件不能删除，见 config.ini [system]nochange", "path": fpath, 'filename': nochange_dir});
+                if curFile==outer_dir:
+                    print("warning: can NOT delete '", curFile, "' as it sits in config.ini::can_not_delete_on_web!")
+                    return jsonify({"msg": "该文件不能删除，见 config.ini [system]can_not_delete_on_web", "path": fpath, 'filename': can_not_delete_on_web_dir});
             
             #如果不存在垃圾箱，则新建垃圾箱
-            dustbin=os.path.abspath( os.path.join(rootPath, "dustbin") );
+            dustbin=os.path.abspath( os.path.join(root_path, "dustbin") );
             if not os.path.exists(dustbin):
                 os.mkdir(dustbin)
             #如果不在垃圾箱，则移动到垃圾箱
@@ -186,7 +184,7 @@ def getfiles():
     if fpath.startswith("../") or (re.search("\/\.\.\/", fpath)!=None):
         return "<a href='/list'>Go Home</a> <br>Invalid '..' detected in fpath, please use valid path! <br>"+fpath;
     #
-    fpathT=os.path.join(rootPath, fpath); #真实地址
+    fpathT=os.path.join(root_path, fpath); #真实地址
     debug+="<div id=fpath style='display:none;'>"+fpath+"</div>";
     #生成顶部路径超链接
     #str to arr, by the end of path
@@ -357,7 +355,6 @@ def getfiles():
 @server.route('/upload', methods=['POST'])
 def upload():
     # 如果不允许上传文件，则直接返回错误提示
-    allow_file_upload = getConf("system", "allow_file_upload", isBool=True)
     if not allow_file_upload:
         return '{"msg": "<b style=\'color:red;\'>Error: uploading file is not allowed now!</b>\
             Please ask the administrator for help: config.ini<br> \
@@ -379,9 +376,9 @@ def upload():
         #    return '<meta http-equiv="refresh" content="3;url='+url+'">'+"<span style='color:red;'>Failed!</span> <br><b style='font-size:30px;'>delete & in your filename and upload again.</b> <br>Returning to list in 5 seconds.<br>";
         
         t = time.strftime('%Y%m%d%H%M%S')
-        new_fname = os.path.join(rootPath, uploadDir, fname.filename);
+        new_fname = os.path.join(root_path, uploadDir, fname.filename);
         if os.path.exists(new_fname): #如果存在，则加时间戳前缀
-            new_fname = os.path.join(rootPath, uploadDir, t +'_'+ fname.filename);
+            new_fname = os.path.join(root_path, uploadDir, t +'_'+ fname.filename);
         fname.save(new_fname)  #保存文件到指定路径
         
         #logger
@@ -407,6 +404,12 @@ def downloader(filename):
 @server.route("/nbpreview/<path:filename>")
 def nbpreview_src(filename):
     return send_from_directory("templates/nbpreview/",filename,as_attachment=False)
+
+# /favicon.ico
+@server.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(server.root_path, 'static/images/'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 
@@ -441,9 +444,6 @@ def print2(color, str):
 # run the app
 if __name__ == '__main__':
     server.debug = True # 设置调试模式，生产模式的时候要关掉debug
-    # env, rootPath defined in webPanLib.lib
-    port = getConf("port", "linux") if env=="linux" else getConf("port", "windows")
-    allow_file_upload = getConf("system", "allow_file_upload", isBool=True)
 
     # 显示欢迎屏
     print2("yellow", "#"*45);
@@ -451,10 +451,11 @@ if __name__ == '__main__':
     print2("yellow", f"#       * Version: {version}                   #" )
     print2("yellow", f"#       * Environment: {env}                #" )
     print2("yellow", f"#       * allow_file_upload: {allow_file_upload}           #" )
-    print2("yellow", f"#       * rootPath: {rootPath}" )
+    print2("yellow", f"#       * root_path: {root_path}" )
+    print2("yellow", f"#       * can_not_delete_on_web_dirs: {can_not_delete_on_web_dirs}" )
     print2("red", f"#       * URL: http://127.0.0.1:{port}        #" )
     print2("yellow", f"#    https://github.com/BioMooc/webPan.py   #" )
     print2("yellow", "#"*45);
-    
+
     server.run(host="0.0.0.0",port=port)
 #
