@@ -18,20 +18,26 @@ def getConf(section, item, file_path="config.ini", isBool=False):
 	return cf.get(section, item)
 
 
+# get env, root_path,
 import sys
 env=sys.platform #"win32"测试环境;  "linux"生产环境
 if env=='linux':
-    rootPath = getConf("rootpath", "linux")
+    root_path = getConf("root_path", "linux")
 elif env=='win32':
-    rootPath = getConf("rootpath", "windows")
+    root_path = getConf("root_path", "windows")
 
+port = getConf("port", "linux") if env=="linux" else getConf("port", "windows")
 version=getConf("system", "version")
 year=time.strftime("%Y", time.localtime())
 
 # 音频播放器地址
 playerPath=getConf("system", "player")
 
+# 从ini中读取不能web删除的文件和文件夹
+can_not_delete_on_web_dirs = getConf("system", "can_not_delete_on_web").split(",")
 
+# 是否允许上传文件
+allow_file_upload = getConf("system", "allow_file_upload", isBool=True)
 
 
 
@@ -80,9 +86,13 @@ head='''
 '''
 head=head % version;
 
+
+
 foot='<div class="wrap footer"> \
     <p>&copy;2020-%s webPan.py %s \
-| <a target=_blank href="https://github.com/BioMooc/webPan.py">Fork Me</a> | RootPath('+rootPath+')</p> \
+| <a target=_blank href="https://github.com/BioMooc/webPan.py">Fork Me</a> | root_path: '+root_path+'</p> \
+can_not_delete_on_web: %s\
+<br> \
 <br>chrome://flags/#block -Secure private network requests | Disabled, Relaunch \
 <br>edge://flags/#block-insecure-private-network-requests | Disabled, Relaunch \
 </div> \
@@ -90,7 +100,7 @@ foot='<div class="wrap footer"> \
     <script src="/static/js/main.js"></script> \
     <script src="/static/js/drag_upload.js"></script> \
 </html>'
-foot=foot % (year, version);
+foot=foot % (year, version, ",".join(can_not_delete_on_web_dirs) );
 
 
 img={
